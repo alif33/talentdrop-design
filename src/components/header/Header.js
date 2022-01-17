@@ -10,9 +10,9 @@ const Header = () => {
         <div className="row align-items-center">
           <div className="col-4">
             <div className={styles.header__logo}>
-              <a href="next/link" className={styles.header__logo_link}>
-                Talentdrop
-              </a>
+              <Link href="/">
+                <a className={styles.header__logo_link}>Talentdrop</a>
+              </Link>
             </div>
           </div>
           <nav className="col-4">

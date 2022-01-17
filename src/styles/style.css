@@ -13,6 +13,7 @@
   --light-green: #05a96e;
   --ligh-blue: #3993ff;
   --overlay: #f4fdfb;
+  --footer-bg: #f7f4fe;
   --border-1: 1px solid rgba(221, 221, 221, 0.5);
   --header-drop-shadow: 0px 4px 18px rgba(0, 0, 0, 0.08);
   --card-drop-shadow: 0 0 16 0 rgba(0, 0, 0, 0.9);
@@ -57,4 +58,16 @@ a:hover {
   padding: 0.7rem 1.5rem;
   outline: none;
   border: none;
+}
+
+@media screen and (min-width: 992px) {
+  .primary__button {
+    padding: 1rem 2.5rem;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .container {
+    max-width: 1600px;
+  }
 }
