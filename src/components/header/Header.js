@@ -18,10 +18,10 @@ const Header = () => {
           <nav className="col-4">
             <ul className={`${styles.header__menu}`}>
               <li className={styles.header__menu_li}>
-                <Link href="">Start Here</Link>
+                <Link href="/">Start Here</Link>
               </li>
               <li className={styles.header__menu_li}>
-                <Link href="">Status</Link>
+                <Link href="/">Status</Link>
               </li>
             </ul>
           </nav>

@@ -65,7 +65,7 @@
 
 .banner__search input {
   height: 100%;
-  width: 100%;
+  /* width: 100%; */
   padding: 1rem 1rem 1rem 0;
   border: none;
   background: transparent;
@@ -76,7 +76,7 @@
   outline: none;
 }
 
-.banner__search > input::placeholder {
+.banner__search>input::placeholder {
   font-weight: 600;
   color: var(--font-color-1-30);
   font-size: 1.2rem;
@@ -124,7 +124,17 @@
   padding: 0 0.5rem;
 }
 
+.banner__tags p .banner_tag_names {
+  font-weight: 300;
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  color: var(--font-color-2);
+  padding: 0 0.3rem;
+
+}
+
 .banner__tags p .see__all_tags {
+  cursor: pointer;
   font-weight: 600;
   font-size: 1.5rem;
   line-height: 2rem;
@@ -157,16 +167,20 @@
     flex-direction: row;
     gap: 0.2rem;
   }
+
   .banner__search {
     border-top-right-radius: unset;
     border-bottom-right-radius: unset;
     box-shadow: unset;
   }
+
   .banner__submit {
     border-top-left-radius: unset;
     border-bottom-left-radius: unset;
     box-shadow: unset;
   }
+
+
 }
 
 @media screen and (min-width: 768px) {
@@ -176,24 +190,33 @@
     gap: 1rem;
     box-shadow: unset;
   }
+
   .banner__search {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     box-shadow: 0 0 18px 0 rgba(0, 0, 0, 0.06);
   }
+
   .banner__submit {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
     box-shadow: 0 0 18px 0 rgba(0, 0, 0, 0.06);
   }
+
   .banner__row {
     flex-direction: row;
   }
+
   .banner__info {
     width: 50%;
   }
+
   .banner__image {
     width: 48%;
+  }
+
+  .banner__submit button {
+    width: 100%;
   }
 }
 
@@ -201,10 +224,12 @@
   .banner__section {
     padding: 6rem 0;
   }
+
   .banner__info_title {
     font-size: 4.8rem;
     line-height: 6.4rem;
   }
+
   .banner__tags p b {
     font-size: 1.8rem;
     line-height: 2.2rem;
@@ -228,32 +253,40 @@
     gap: 0.1rem;
     box-shadow: 0 0 18px 0 rgba(0, 0, 0, 0.06);
   }
+
   .banner__search {
     border-top-right-radius: unset;
     border-bottom-right-radius: unset;
     box-shadow: unset;
   }
+
   .banner__submit {
     border-top-left-radius: unset;
     border-bottom-left-radius: unset;
     box-shadow: unset;
   }
+
   .banner__submit span {
     white-space: nowrap;
     padding: 0 0.5rem;
   }
+
   .banner__row {
     justify-content: flex-end;
   }
+
   .banner__info {
     max-width: 600px;
   }
+
   .banner__image {
     justify-content: unset;
   }
+
   .banner__image_short img {
     height: 555px !important;
   }
+
   .banner__image_long img {
     height: 659px !important;
   }
@@ -264,16 +297,20 @@
     padding: 12.5rem 0 0 0;
     margin-right: 6rem;
   }
+
   .banner__findJob {
     margin-top: 0.7rem;
   }
+
   .banner__search input,
   .banner__submit {
     padding: 1.3rem 1rem;
   }
+
   .banner__tags {
     margin-top: 2.2rem;
   }
+
   .banner__image {
     margin-top: 6rem;
     margin-right: -6rem;

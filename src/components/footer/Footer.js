@@ -24,51 +24,51 @@ export default function Footer() {
               <nav className={styles.footer__menu}>
                 <ul>
                   <li>
-                    <Link href="">our team</Link>
+                    <Link href="/">our team</Link>
                   </li>
                   <li>
-                    <Link href="">terms of use</Link>
+                    <Link href="/">terms of use</Link>
                   </li>
                   <li>
-                    <Link href="">privacy policy</Link>
+                    <Link href="/">privacy policy</Link>
                   </li>
                   <li>
-                    <Link href="">for referrers</Link>
+                    <Link href="/">for referrers</Link>
                   </li>
                   <li>
-                    <Link href="">for employers</Link>
+                    <Link href="/">for employers</Link>
                   </li>
                   <li>
-                    <Link href="">pricing</Link>
+                    <Link href="/">pricing</Link>
                   </li>
                   <li>
-                    <Link href="">contact us</Link>
+                    <Link href="/">contact us</Link>
                   </li>
                 </ul>
               </nav>
               <div className={styles.footer__social}>
                 <div className={styles.footer__social_item}>
-                  <Link href="" passHref>
+                  <Link href="/" passHref>
                     <i className="fab fa-facebook-f"></i>
                   </Link>
                 </div>
                 <div className={styles.footer__social_item}>
-                  <Link href="" passHref>
+                  <Link href="/" passHref>
                     <i className="fab fa-twitter"></i>
                   </Link>
                 </div>
                 <div className={styles.footer__social_item}>
-                  <Link href="" passHref>
+                  <Link href="/" passHref>
                     <i className="fab fa-instagram"></i>
                   </Link>
                 </div>
                 <div className={styles.footer__social_item}>
-                  <Link href="" passHref>
+                  <Link href="/" passHref>
                     <i className="fab fa-linkedin-in"></i>
                   </Link>
                 </div>
                 <div className={styles.footer__social_item}>
-                  <Link href="" passHref>
+                  <Link href="/" passHref>
                     <i className="fab fa-google-plus-g"></i>
                   </Link>
                 </div>
