@@ -5,7 +5,7 @@ import styles from './Card.module.css';
 export default function CardGrid() {
   return (
     <div className={`${styles.card__wrapper}`}>
-      <div className={`${styles.card__body}`}>
+      <div className={`${styles.card__body} text-center`}>
         <div className={styles.card__img}>
           <Image src={ample} alt="card/img" />
         </div>
