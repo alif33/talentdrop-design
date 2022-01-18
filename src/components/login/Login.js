@@ -13,6 +13,7 @@ export default function Login() {
             <button type="reset">Forgot Password?</button>
           </form>
         </div>
+        <p>Log in With</p>
       </div>
     </section>
   );
