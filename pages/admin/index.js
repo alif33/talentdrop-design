@@ -1,10 +1,11 @@
+import Admin from "../../src/components/admin";
 
 
 const index = () => {
     return (
-        <div>
-            <h1>Hello</h1>
-        </div>
+        <>
+            <Admin></Admin>
+        </>
     );
 };
 

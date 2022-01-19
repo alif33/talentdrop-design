@@ -1,10 +1,13 @@
+import JobCategorpy from "./JobCategory";
 
-const index = () => {
+const Admin = () => {
     return (
-        <div>
-            <h1>This is admin panel</h1>
-        </div>
+        <>
+            <JobCategorpy>
+
+            </JobCategorpy>
+        </>
     );
 };
 
-export default index;
+export default Admin;
