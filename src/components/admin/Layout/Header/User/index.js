@@ -18,7 +18,7 @@ const index = () => {
                             <div className="d-flex flex-column">
                                 <div className="fw-bolder d-flex align-items-center fs-5">Max Smith
                                 </div>
-                                <a href="#" className="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
+                                <a href="/" className="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
                             </div>
                         </div>
                     </div>
