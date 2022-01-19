@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import Banner from '../src/components/banner/Banner';
-import Cards from '../src/components/cards/Cards';
-import Layout from '../src/components/layout';
-import TrustedCompany from '../src/components/trustedCompanies/TrustedCompany';
+import Banner from '../src/components/client/banner/Banner';
+import Cards from '../src/components/client/cards/Cards';
+import Layout from '../src/components/client/layout';
+import TrustedCompany from '../src/components/client/trustedCompanies/TrustedCompany';
 
 export default function Home() {
   return (

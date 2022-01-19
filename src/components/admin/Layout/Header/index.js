@@ -13,7 +13,7 @@ const Header = () => {
         <>
             <div id="kt_header" style={{}} className="header align-items-stretch">
                 <div className="container-fluid d-flex align-items-stretch justify-content-between">
-                    <div className="d-flex align-items-center d-lg-none ms-n3 me-1" data-bs-toggle="tooltip" title data-bs-original-title="Show aside menu">
+                    <div className="d-flex align-items-center d-lg-none ms-n3 me-1" data-bs-toggle="tooltip" title='true' data-bs-original-title="Show aside menu">
                         <div className="btn btn-icon btn-active-light-primary" id="kt_aside_mobile_toggle">
                             <span className="svg-icon svg-icon-2x mt-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -59,7 +59,7 @@ const Header = () => {
                         </div>
                         <div className="d-flex align-items-stretch flex-shrink-0">
                             <User></User>
-                            <div className="d-flex align-items-center d-lg-none ms-2 me-n3" data-bs-toggle="tooltip" title data-bs-original-title="Show header menu">
+                            <div className="d-flex align-items-center d-lg-none ms-2 me-n3" data-bs-toggle="tooltip" title='true' data-bs-original-title="Show header menu">
                                 <div className="btn btn-icon btn-active-light-primary" id="kt_header_menu_mobile_toggle">
                                     {/*begin::Svg Icon | path: icons/stockholm/Text/Toggle-Right.svg*/}
                                     <span className="svg-icon svg-icon-1">
