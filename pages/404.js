@@ -1,4 +1,4 @@
-import Layout from '../src/components/layout';
+import Layout from '../src/components/client/layout';
 
 export default function ErrorPage() {
   return (

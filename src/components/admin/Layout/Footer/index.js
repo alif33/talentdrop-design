@@ -8,7 +8,7 @@ const Footer = () => {
                     {/*begin::Copyright*/}
                     <div className="text-dark order-2 order-md-1">
                         <span className="text-muted fw-bold me-1">2021©</span>
-                        <a href target="_blank" className="text-gray-800 text-hover-primary">Keenthemes</a>
+                        <a href="https://keenthemes.com/faqs" target="_blank" className="text-gray-800 text-hover-primary">Keenthemes</a>
                     </div>
                     {/*end::Copyright*/}
                     {/*begin::Menu*/}
