@@ -1,4 +1,4 @@
-import Admin from "../../src/components/admin";
+import Admin from "../../../src/components/admin";
 
 
 const index = () => {

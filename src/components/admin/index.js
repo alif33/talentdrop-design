@@ -1,11 +1,9 @@
-import JobCategorpy from "./JobCategory";
+import Dashboard from "./Dashboard";
 
 const Admin = () => {
     return (
         <>
-            <JobCategorpy>
-
-            </JobCategorpy>
+            <Dashboard></Dashboard>
         </>
     );
 };
