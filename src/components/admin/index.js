@@ -1,10 +1,11 @@
+import Dashboard from "./Dashboard";
 
-const index = () => {
+const Admin = () => {
     return (
-        <div>
-            <h1>This is admin panel</h1>
-        </div>
+        <>
+            <Dashboard></Dashboard>
+        </>
     );
 };
 
-export default index;
+export default Admin;
