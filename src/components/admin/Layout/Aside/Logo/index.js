@@ -1,11 +1,14 @@
-
+import Link from "next/link";
 const Logo = () => {
     return (
         <>
             <div className="aside-logo flex-column-auto" id="kt_aside_logo">
-                <a href="index.html">
-                    <img alt="Logo" src="assets/media/logos/logo-1.svg" className="h-15px logo" />
-                </a>
+                <Link href="/">
+                    <a>
+                        {/* <img alt="Logo" src="assets/media/logos/logo-1.svg" className="h-15px logo" /> */}
+                        <h2>Talentdrop</h2>
+                    </a>
+                </Link>
                 <div id="kt_aside_toggle" className="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="aside-minimize">
                     <span className="svg-icon svg-icon-1 rotate-180">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

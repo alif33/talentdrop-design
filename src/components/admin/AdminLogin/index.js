@@ -1,13 +1,15 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from "react-hot-toast";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import BeatLoader from "react-spinners/BeatLoader";
 import Cookies from 'universal-cookie';
 import { adminLogin } from '../../../../store/admins/actions';
+import { modalToggle } from '../../../../store/settings/actions';
 import { postData } from '../../../../__lib__/helpers/HttpService';
-
+import ResetPassword from './ResetPassword';
 
 
 export default function AdminLogin() {
@@ -17,6 +19,8 @@ export default function AdminLogin() {
     const router = useRouter()
     const dispatch = useDispatch()
     const [disable, setDisable] = useState(false)
+    const { settings } = useSelector(state => state)
+    const [trigger, setTrigger] = useState(false)
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const onSubmit = data => {
         setDisable(true)
@@ -65,16 +69,19 @@ export default function AdminLogin() {
 
                         </div>
                         <div className="fv-row mb-10 fv-plugins-icon-container">
-                            <div className="d-flex flex-stack mb-2">
-                                <label className="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
-                                <a href="authentication/flows/basic/password-reset.html" className="link-primary fs-6 fw-bolder">Forgot Password ?</a>
-                            </div>
-
+                            <label className="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
                             <input {...register("password", { required: true })}
                                 className="form-control form-control-lg form-control-solid"
                                 autoComplete='off' type='password' name="password" />
-                            <div className="fv-plugins-message-container" >
+                            <div className="d-flex justify-content-end">
+                                <span onClick={() => {
+                                    dispatch(modalToggle(settings.modal))
+                                    setTrigger(true)
+                                }} className="link-primary fs-6 fw-bolder">Forgot Password ?</span>
 
+
+                            </div>
+                            <div className="fv-plugins-message-container" >
                                 {errors.password && <span className="text-danger">Password is required</span>}
                             </div>
 
@@ -89,13 +96,15 @@ export default function AdminLogin() {
 
                                 </span>
                             </button>
-
-
-
                         </div>
-                        <div /></form>
+                        <div />
+                        <Link href='/'>
+                            <a>← Home</a>
+                        </Link>
+                    </form>
+                    {trigger && <ResetPassword></ResetPassword>}
                 </div>
-            </div>
+            </div >
         </>
     );
 }
