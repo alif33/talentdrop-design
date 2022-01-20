@@ -1,4 +1,5 @@
 import JobCategorpy from "../../../src/components/admin/JobCategory";
+import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
 
 const index = () => {
     return (
