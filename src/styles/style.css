@@ -86,7 +86,7 @@ textarea {
   border: none;
   padding: 1rem;
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
 }
 
 input[type='text']::placeholder,

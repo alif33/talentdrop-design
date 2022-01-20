@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { adminLogout } from "../../../../../../store/admins/actions";
 
 const index = () => {
+    const dispatch = useDispatch()
     const [selectProfile, setSelectProfile] = useState(false)
     return (
         <>
@@ -24,7 +27,8 @@ const index = () => {
                     </div>
                     <div className="separator my-2" />
                     <div className="menu-item px-5">
-                        <a href="authentication/flows/basic/sign-in.html" className="menu-link px-5">Sign Out</a>
+                        <span onClick={() => dispatch(adminLogout())} className="menu-link px-5"> Sign Out</span>
+
                     </div>
                 </div>
             </div>
