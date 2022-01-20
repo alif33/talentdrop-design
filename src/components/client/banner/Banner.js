@@ -34,9 +34,14 @@ const Banner = () => {
                     placeholder="What job are you looking for?"
                   />
                 </div>
-                <div className={styles.banner__submit}>
+                <div className={styles.banner__search}>
                   <i className="fas fa-map-marker-alt"></i>
-                  <span>Where looking for?</span>
+                  <input
+                    name="location"
+                    type=""
+                    placeholder="Where looking for?" />
+                </div>
+                <div className={styles.banner__submit}>
                   <input
                     type="submit"
                     className="primary__button"

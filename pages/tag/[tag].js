@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from "next/router";
-import CardRow from "../../src/components/cardrow/CardRow";
-import Layout from "../../src/components/layout";
+import CardRow from '../../src/components/client/cardrow/CardRow';
+import Layout from '../../src/components/client/layout';
 import styles from './Tag.module.css';
 const Tags = () => {
     const router = useRouter()
