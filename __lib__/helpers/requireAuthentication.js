@@ -5,17 +5,17 @@ export function userAuth(gssp) {
         const { req, res } = context
         if (req.headers.cookie) {
             const cookies = cookie.parse(req.headers.cookie)
-           
+
             if (!cookies.user_token) {
                 return {
                     redirect: {
                         destination: '/signin',
-    
+
                     }
                 }
-            } 
+            }
 
-        }else{
+        } else {
             return {
                 redirect: {
                     destination: '/signin',
@@ -32,17 +32,17 @@ export function adminAuth(gssp) {
         const { req, res } = context
         if (req.headers.cookie) {
             const cookies = cookie.parse(req.headers.cookie)
-           console.log(cookies);
-            if (!cookies._token) {
-                return {
-                    redirect: {
-                        destination: '/admin/login',
-    
-                    }
-                }
-            } 
+            console.log(cookies);
+            // if (!cookies._token) {
+            //     return {
+            //         redirect: {
+            //             destination: '/admin/login',
 
-        }else{
+            //         }
+            //     }
+            // }
+
+        } else {
             return {
                 redirect: {
                     destination: '/admin/login',
