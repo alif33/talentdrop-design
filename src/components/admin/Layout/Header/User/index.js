@@ -1,10 +1,26 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import Cookies from 'universal-cookie';
 import { adminLogout } from "../../../../../../store/admins/actions";
-
 const index = () => {
+    const cookies = new Cookies();
     const dispatch = useDispatch()
+    const router = useRouter()
     const [selectProfile, setSelectProfile] = useState(false)
+    const { admins } = useSelector(state => state)
+    const { admin } = admins
+
+    const handleSignOut = () => {
+        cookies.remove('_token', { path: '/' });
+        if (!cookies.get('_token')) {
+            toast.success('Logout success')
+            dispatch(adminLogout())
+            router.push('/admin/login')
+        }
+
+    }
     return (
         <>
             <div className={`d-flex align-items-center ms-1 ms-lg-3 ${selectProfile ? 'show menu-dropdown' : ''}`} id="kt_header_user_menu_toggle">
@@ -19,15 +35,15 @@ const index = () => {
                                 <img alt="Logo" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80" />
                             </div>
                             <div className="d-flex flex-column">
-                                <div className="fw-bolder d-flex align-items-center fs-5">Max Smith
+                                <div className="fw-bolder d-flex align-items-center fs-5">{admin?.name}
                                 </div>
-                                <a href="/" className="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
+                                <a href="/" className="fw-bold text-muted text-hover-primary fs-7">{admin?.email}</a>
                             </div>
                         </div>
                     </div>
                     <div className="separator my-2" />
                     <div className="menu-item px-5">
-                        <span onClick={() => dispatch(adminLogout())} className="menu-link px-5"> Sign Out</span>
+                        <span onClick={() => handleSignOut()} className="menu-link px-5"> Sign Out</span>
 
                     </div>
                 </div>

@@ -53,6 +53,17 @@ const Header = () => {
                                         </Link>
 
                                     </div>
+                                    <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" className={`menu-item menu-lg-down-accordion me-lg-1 ${selectMenu ? 'show menu-dropdown' : ''}`}>
+                                        <Link href='/admin/tags'>
+                                            <a>
+                                                <span className={`menu-link py-3 ${pathname == '/admin/tags' && 'active'}`}>
+                                                    <span className="menu-title">Tags</span>
+                                                    <span className="menu-arrow d-lg-none" />
+                                                </span>
+                                            </a>
+                                        </Link>
+
+                                    </div>
 
                                 </div>
                             </div>

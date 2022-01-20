@@ -15,7 +15,7 @@ export const adminSlice = createSlice({
                 ...state,
                 isAdmin: true,
                 token: action.payload.token,
-                admin: action.payload.user
+                admin: action.payload.admin
             }
 
         },

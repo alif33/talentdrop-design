@@ -6,7 +6,7 @@
 .input-group {
     &.input-group-solid {
         background-color: $input-solid-bg;
-        border-color: $input-solid-bg;
+		border-color: $input-solid-bg;
         @include border-radius($input-border-radius);
 
         &.input-group-sm {
@@ -19,12 +19,12 @@
 
         .input-group-text {
             background-color: transparent;
-            border-color: transparent;
+    		border-color: transparent;
         }
 
         .form-control {
             background-color: transparent;
-            border-color: transparent;
+    		border-color: transparent;
         }
     }
 }

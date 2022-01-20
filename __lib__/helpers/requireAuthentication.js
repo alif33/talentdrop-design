@@ -32,15 +32,14 @@ export function adminAuth(gssp) {
         const { req, res } = context
         if (req.headers.cookie) {
             const cookies = cookie.parse(req.headers.cookie)
-            console.log(cookies);
-            // if (!cookies._token) {
-            //     return {
-            //         redirect: {
-            //             destination: '/admin/login',
+            if (!cookies._token) {
+                return {
+                    redirect: {
+                        destination: '/admin/login',
 
-            //         }
-            //     }
-            // }
+                    }
+                }
+            }
 
         } else {
             return {
