@@ -1,25 +1,24 @@
 import axios from 'axios'
-import { toast } from 'react-toastify'
+import { toast } from 'react-hot-toast'
 
-export const ROOT_URL= `http://www.bachelortimes.com/`
-export const APP_URL= `http://www.bachelortimes.com/`
+export const ROOT_URL = `https://www.v3.bachelortimes.com/`
+export const APP_URL = `https://www.v3.bachelortimes.com/`
 export const IMAGE_URL = `${APP_URL}/public/storage`
-export const API_URL= `${APP_URL}api/`
-// http://www.bachelortimes.com/public/storage/products/vsz7ZWFClzF8MojW9hxLBvbO8RWVgSvfLecNpplK.jpg
+export const API_URL = `${APP_URL}api/`
 
 const api = axios.create({
     baseURL: API_URL
 })
 
-const authHeader = token =>{
+const authHeader = token => {
     return {
-        'Authorization': `Bearer ${token}`, 
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
     }
 }
 export const getData = async (endPoint) => {
     try {
-      const { data } = await api.get(endPoint)
+        const { data } = await api.get(endPoint)
         return data
     } catch (error) {
         toast.error(error?.response?.data?.message)
@@ -28,20 +27,20 @@ export const getData = async (endPoint) => {
 
 export const getUserData = async (endPoint, token) => {
     try {
-      const { data } = await api.get(endPoint, {
-          headers: authHeader(token)
-      })
+        const { data } = await api.get(endPoint, {
+            headers: authHeader(token)
+        })
         return data
     } catch (error) {
         toast.error(error?.response?.data?.message);
         return error;
-        
+
     }
 }
 
 export const postData = async (endPoint, formData, setDisable) => {
     try {
-      const { data } = await api.post(endPoint, formData)
+        const { data } = await api.post(endPoint, formData)
         setDisable(false)
         return data
     } catch (error) {
@@ -51,9 +50,9 @@ export const postData = async (endPoint, formData, setDisable) => {
     }
 }
 
-export const postReq = async (endPoint, formData ) => {
+export const postReq = async (endPoint, formData) => {
     try {
-      const { data } = await api.post(endPoint, formData)
+        const { data } = await api.post(endPoint, formData)
         return data
     } catch (error) {
         toast.error(error?.response?.data?.message)
@@ -61,25 +60,26 @@ export const postReq = async (endPoint, formData ) => {
     }
 }
 
-export const authPost = async ( endPoint, formData, token ) => {
+export const authPost = async (endPoint, formData, token) => {
 
     try {
         const { data } = await api.post(endPoint, formData, {
             headers: authHeader(token)
         })
-          return data
-      } catch (error) {
-          toast.error(error?.response?.data?.message)
-          return error
-      }
+        return data
+    } catch (error) {
+
+        toast.error(error?.response?.data?.message)
+        return error
+    }
 }
 
 
 export const updateData = async (endPoint, formData, token) => {
     try {
-      const { data } = await axios.put(API_URL+endPoint, formData, {
+        const { data } = await axios.put(API_URL + endPoint, formData, {
             headers: authHeader(token)
-      })        
+        })
         return data
     } catch (error) {
         toast.error(error?.response?.data?.message)
@@ -87,12 +87,12 @@ export const updateData = async (endPoint, formData, token) => {
     }
 }
 
-export const getFormData = async( key, data ) => {
+export const getFormData = async (key, data) => {
     // needed for images
     const formData = new FormData()
-        for (let i = 0; i < key.length; i++) {
-            formData.append(key[i], data[i])
-        }
-    return  formData;
+    for (let i = 0; i < key.length; i++) {
+        formData.append(key[i], data[i])
+    }
+    return formData;
 }
 

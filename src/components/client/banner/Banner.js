@@ -1,20 +1,17 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { useState } from 'react';
 import img1 from '../../../assets/img1.png';
 import img2 from '../../../assets/img2.png';
 import styles from './Banner.module.css';
+import Tags from './Tags';
 
-const allTags = ['a16z', 'blockchain', 'climate', 'contrast', 'data', 'design', 'hello', 'world', 'how', 'to', 'him', 'javaSctipt', 'SQL']
 
 const Banner = () => {
-  const [allTag, setAllTag] = useState(false)
   const [changeValue, setChangeValue] = useState()
   const handleSubmit = (e) => {
     e.preventDefault()
     alert(changeValue)
   }
-  const sortTags = allTags.slice(0, 6)
   return (
     <section className={styles.banner__section}>
       <div className={`container ${styles.banner__continer}`}>
@@ -53,20 +50,7 @@ const Banner = () => {
             <div className={styles.banner__tags}>
               <p>
                 <b>Or try a tag:</b>
-                {allTag ? <span> {allTags.map((tag, i) => (
-                  <Link href={`/tag/${tag.toLowerCase()}`} key={i}>
-                    <a className={styles.banner_tag_names}>{tag},</a>
-                  </Link>
-                ))} </span> : <span>
-                  {sortTags.map((tag, i) => (
-                    <Link href={`/tag/${tag.toLowerCase()}`} key={i}>
-                      <a className={styles.banner_tag_names}>{tag},</a>
-                    </Link>
-                  ))}
-                  ...</span>}
-
-                <span className={styles.see__all_tags} onClick={() => setAllTag(!allTag)}>{allTag ? 'collapse' : 'See All Tags'}</span>
-
+                <Tags></Tags>
               </p>
             </div>
           </div>
