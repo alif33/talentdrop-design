@@ -1,5 +1,6 @@
-import Admin from "../../../src/components/admin";
 
+import { adminAuth } from '../../../__lib__/helpers/requireAuthentication';
+import Admin from './../../../src/components/admin/index';
 
 const index = () => {
     return (
@@ -10,3 +11,9 @@ const index = () => {
 };
 
 export default index;
+
+export const getServerSideProps = adminAuth(context => {
+    return {
+        props: {}
+    }
+})
