@@ -9,3 +9,8 @@ const index = () => {
 };
 
 export default index;
+export const getServerSideProps = adminAuth(context => {
+    return {
+        props: {}
+    }
+})
