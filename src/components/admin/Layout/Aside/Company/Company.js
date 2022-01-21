@@ -1,14 +1,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { modalToggle } from '../../../../../../store/settings/actions';
-import AddTag from '../../../Tags/AddTag';
 
-const Tag = () => {
+const Company = () => {
     const [menuItem, setMenuItem] = useState(false)
-    const dispatch = useDispatch()
-    const { settings } = useSelector(state => state)
-    const [trigger, setTrigger] = useState(false)
 
     return (
         <>
@@ -22,33 +16,30 @@ const Tag = () => {
                             </svg>
                         </span>
                     </span>
-                    <span className="menu-title">Tags</span>
+                    <span className="menu-title">Company</span>
                     <span className="menu-arrow" />
                 </span>
                 <div className={`menu-sub menu-sub-accordion menu-active-bg ${menuItem && 'show'}`}>
                     <div className="menu-item">
-                        <Link href='/admin/tags'>
+                        <Link href='/admin/companies'>
                             <a className="menu-link">
                                 <span className="menu-bullet">
                                     <span className="bullet bullet-dot" />
                                 </span>
-                                <span className="menu-title">All Tags</span>
+                                <span className="menu-title">All Companies</span>
                             </a>
                         </Link>
                     </div>
                     <div className="menu-item">
-                        <span onClick={() => {
-                            dispatch(modalToggle(settings.modal))
-                            setTrigger(true)
-                        }} className="menu-link">
-                            <span className="menu-bullet">
-                                <span className="bullet bullet-dot" />
-                            </span>
-                            <span className="menu-title">Add Tag</span>
-                        </span>
+                        <Link href="/admin/add-company">
+                            <a className="menu-link">
+                                <span className="menu-bullet">
+                                    <span className="bullet bullet-dot" />
+                                </span>
+                                <span className="menu-title">Add Company</span>
+                            </a>
+                        </Link>
                     </div>
-                    {trigger && <AddTag></AddTag>}
-
 
                 </div>
             </div>
@@ -56,4 +47,4 @@ const Tag = () => {
     );
 };
 
-export default Tag;
+export default Company;

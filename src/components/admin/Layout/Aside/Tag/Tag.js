@@ -1,7 +1,14 @@
-import { useState } from "react";
-import JobsSubMenu from "./JobsSubMenu";
-const Jobs = () => {
+import Link from 'next/link';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { modalToggle } from '../../../../../../store/settings/actions';
+import AddTag from '../../../Tags/AddTag/AddTag';
+
+const Tag = () => {
     const [menuItem, setMenuItem] = useState(false)
+    const dispatch = useDispatch()
+    const { settings } = useSelector(state => state)
+    const [trigger, setTrigger] = useState(false)
 
     return (
         <>
@@ -15,13 +22,38 @@ const Jobs = () => {
                             </svg>
                         </span>
                     </span>
-                    <span className="menu-title">Jobs</span>
+                    <span className="menu-title">Tags</span>
                     <span className="menu-arrow" />
                 </span>
-                <JobsSubMenu menuItem={menuItem}></JobsSubMenu>
+                <div className={`menu-sub menu-sub-accordion menu-active-bg ${menuItem && 'show'}`}>
+                    <div className="menu-item">
+                        <Link href='/admin/tags'>
+                            <a className="menu-link">
+                                <span className="menu-bullet">
+                                    <span className="bullet bullet-dot" />
+                                </span>
+                                <span className="menu-title">All Tags</span>
+                            </a>
+                        </Link>
+                    </div>
+                    <div className="menu-item">
+                        <span onClick={() => {
+                            dispatch(modalToggle(settings.modal))
+                            setTrigger(true)
+                        }} className="menu-link">
+                            <span className="menu-bullet">
+                                <span className="bullet bullet-dot" />
+                            </span>
+                            <span className="menu-title">Add Tag</span>
+                        </span>
+                    </div>
+                    {trigger && <AddTag />}
+
+
+                </div>
             </div>
         </>
     );
 };
 
-export default Jobs;
+export default Tag;

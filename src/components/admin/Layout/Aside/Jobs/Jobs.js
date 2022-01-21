@@ -1,7 +1,6 @@
-import { useState } from 'react';
-import CompanySubMenu from './ComapnySubMenu';
-
-const Company = () => {
+import { useState } from "react";
+import JobsSubMenu from "./JobsSubMenu/JobsSubMenu";
+const Jobs = () => {
     const [menuItem, setMenuItem] = useState(false)
 
     return (
@@ -16,13 +15,13 @@ const Company = () => {
                             </svg>
                         </span>
                     </span>
-                    <span className="menu-title">Company</span>
+                    <span className="menu-title">Jobs</span>
                     <span className="menu-arrow" />
                 </span>
-                <CompanySubMenu menuItem={menuItem}></CompanySubMenu>
+                <JobsSubMenu menuItem={menuItem}></JobsSubMenu>
             </div>
         </>
     );
 };
 
-export default Company;
+export default Jobs;

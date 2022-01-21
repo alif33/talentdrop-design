@@ -4,7 +4,6 @@
 
 // General mode(all devices)
 .aside {
-	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	box-shadow: get($aside-config, box-shadow);
