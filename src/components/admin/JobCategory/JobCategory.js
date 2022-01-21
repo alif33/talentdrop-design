@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "reactstrap";
 import { modalToggle } from "../../../../store/settings/actions";
-import Layout from "../Layout";
-import Modals from './../Modal/index';
+import Layout from "../Layout/Layout";
+import Modals from '../Modal/Modals';
 
-const JobCategorpy = () => {
+const JobCategory = () => {
     const dispatch = useDispatch()
     const { settings } = useSelector(state => state)
     const [trigger, setTrigger] = useState()
@@ -83,4 +83,4 @@ const JobCategorpy = () => {
     );
 };
 
-export default JobCategorpy;
+export default JobCategory;

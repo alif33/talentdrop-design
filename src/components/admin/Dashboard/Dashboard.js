@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import Layout from "../Layout";
+import Layout from "../Layout/Layout";
 
 const Dashboard = () => {
     const { admins } = useSelector(state => state)

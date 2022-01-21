@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { modalToggle } from '../../../../store/settings/actions';
 import { setTags } from '../../../../store/tags/actions';
-import Layout from '../Layout';
-import AddTag from './AddTag';
+import Layout from '../Layout/Layout';
+import AddTag from './AddTag/AddTag';
 
 const Tags = () => {
     const [trigger, setTrigger] = useState(false)

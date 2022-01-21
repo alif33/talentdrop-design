@@ -1,8 +1,10 @@
 import Link from 'next/link';
-import Company from './Company';
-import Jobs from './Jobs';
-import Logo from './Logo';
-import Tag from './Tag';
+import Company from './Company/Company';
+import Jobs from './Jobs/Jobs';
+import Logo from './Logo/Logo';
+import Tag from './Tag/Tag';
+
+
 const Aside = () => {
 
     return (
@@ -11,7 +13,7 @@ const Aside = () => {
             <Logo></Logo>
             <div className="aside-menu flex-column-fluid">
                 <div className="hover-scroll-overlay-y my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset={0}>
-                    <div className="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
+                    <div style={{ height: '100vh' }} className="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
                         <div className="menu-item">
                             <Link href='/admin/dashboard'>
                                 <a className="menu-link">

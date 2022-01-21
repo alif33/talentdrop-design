@@ -1,8 +1,14 @@
+import Link from 'next/link';
 import { useState } from 'react';
-import CompanySubMenu from './ComapnySubMenu';
+import { useDispatch, useSelector } from 'react-redux';
+import { modalToggle } from '../../../../../../store/settings/actions';
+import AddTag from '../../../Tags/AddTag/AddTag';
 
-const Company = () => {
+const Tag = () => {
     const [menuItem, setMenuItem] = useState(false)
+    const dispatch = useDispatch()
+    const { settings } = useSelector(state => state)
+    const [trigger, setTrigger] = useState(false)
 
     return (
         <>
@@ -16,13 +22,38 @@ const Company = () => {
                             </svg>
                         </span>
                     </span>
-                    <span className="menu-title">Company</span>
+                    <span className="menu-title">Tags</span>
                     <span className="menu-arrow" />
                 </span>
-                <CompanySubMenu menuItem={menuItem}></CompanySubMenu>
+                <div className={`menu-sub menu-sub-accordion menu-active-bg ${menuItem && 'show'}`}>
+                    <div className="menu-item">
+                        <Link href='/admin/tags'>
+                            <a className="menu-link">
+                                <span className="menu-bullet">
+                                    <span className="bullet bullet-dot" />
+                                </span>
+                                <span className="menu-title">All Tags</span>
+                            </a>
+                        </Link>
+                    </div>
+                    <div className="menu-item">
+                        <span onClick={() => {
+                            dispatch(modalToggle(settings.modal))
+                            setTrigger(true)
+                        }} className="menu-link">
+                            <span className="menu-bullet">
+                                <span className="bullet bullet-dot" />
+                            </span>
+                            <span className="menu-title">Add Tag</span>
+                        </span>
+                    </div>
+                    {trigger && <AddTag />}
+
+
+                </div>
             </div>
         </>
     );
 };
 
-export default Company;
+export default Tag;

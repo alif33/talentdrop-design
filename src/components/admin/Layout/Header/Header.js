@@ -1,13 +1,7 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import User from './User';
-const Header = () => {
-    const router = useRouter()
-    const { pathname } = router
-    const [selectMenu, setSelectMenu] = useState(false)
-    console.log(selectMenu)
 
+import MenuItem from "./MenuItem/MenuItem";
+import User from './User/User';
+const Header = () => {
 
     return (
         <>
@@ -34,42 +28,13 @@ const Header = () => {
                     <div className="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
                         <div className="d-flex align-items-stretch" id="kt_header_nav">
                             <div className="header-menu align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="header-menu" data-kt-drawer-activate="{default: , lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_header_menu_mobile_toggle" data-kt-place="true" data-kt-place-mode="prepend" data-kt-place-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
-                                <div className="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch" id="#kt_header_menu" data-kt-menu="true">
-                                    <div className="menu-item me-lg-1">
-                                        <Link href='/admin/dashboard'>
-                                            <a className={`menu-link py-3 ${pathname == '/admin/dashboard' && 'active'}`}>
-                                                <span className="menu-title">Dashboard</span>
-                                            </a>
-                                        </Link>
-                                    </div>
-                                    <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" className={`menu-item menu-lg-down-accordion me-lg-1 ${selectMenu ? 'show menu-dropdown' : ''}`}>
-                                        <Link href='/admin/jobcategory'>
-                                            <a>
-                                                <span className={`menu-link py-3 ${pathname == '/admin/jobcategory' && 'active'}`}>
-                                                    <span className="menu-title">Job Category</span>
-                                                    <span className="menu-arrow d-lg-none" />
-                                                </span>
-                                            </a>
-                                        </Link>
-
-                                    </div>
-                                    <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start" className={`menu-item menu-lg-down-accordion me-lg-1 ${selectMenu ? 'show menu-dropdown' : ''}`}>
-                                        <Link href='/admin/tags'>
-                                            <a>
-                                                <span className={`menu-link py-3 ${pathname == '/admin/tags' && 'active'}`}>
-                                                    <span className="menu-title">Tags</span>
-                                                    <span className="menu-arrow d-lg-none" />
-                                                </span>
-                                            </a>
-                                        </Link>
-
-                                    </div>
-
-                                </div>
+                                <MenuItem />
                             </div>
                         </div>
                         <div className="d-flex align-items-stretch flex-shrink-0">
+
                             <User></User>
+
                             <div className="d-flex align-items-center d-lg-none ms-2 me-n3" data-bs-toggle="tooltip" title='true' data-bs-original-title="Show header menu">
                                 <div className="btn btn-icon btn-active-light-primary" id="kt_header_menu_mobile_toggle">
                                     {/*begin::Svg Icon | path: icons/stockholm/Text/Toggle-Right.svg*/}

@@ -1,4 +1,4 @@
-import Tags from "../../../src/components/admin/Tags";
+import Tags from "../../../src/components/admin/Tags/Tags";
 
 const index = () => {
     return (

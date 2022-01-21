@@ -4,7 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import { modalToggle } from "../../../../store/settings/actions";
-import Modals from "../Modal";
+import Modals from '../Modal/Modals';
 
 const ResetPassword = () => {
     const [loading, setLoading] = useState(true);

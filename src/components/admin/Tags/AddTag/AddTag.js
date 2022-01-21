@@ -6,7 +6,7 @@ import { BeatLoader } from "react-spinners";
 import { modalToggle } from '../../../../../store/settings/actions';
 import { setTags } from '../../../../../store/tags/actions';
 import { authPost } from '../../../../../__lib__/helpers/HttpService';
-import Modals from "../../Modal";
+import Modals from '../../Modal/Modals';
 
 
 
@@ -59,7 +59,7 @@ const AddTag = () => {
                                 <input
                                     {...register("tag_name",
                                         {
-                                            required: 'Tag name required.',
+                                            required: true,
                                         }
                                     )}
                                     className="form-control"
