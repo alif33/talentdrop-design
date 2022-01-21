@@ -1,5 +1,5 @@
+import Link from "next/link";
 import { useState } from "react";
-import JobsSubMenu from "./JobsSubMenu/JobsSubMenu";
 const Jobs = () => {
     const [menuItem, setMenuItem] = useState(false)
 
@@ -18,7 +18,29 @@ const Jobs = () => {
                     <span className="menu-title">Jobs</span>
                     <span className="menu-arrow" />
                 </span>
-                <JobsSubMenu menuItem={menuItem}></JobsSubMenu>
+                <div className={`menu-sub menu-sub-accordion menu-active-bg ${menuItem ? 'show' : ''}`} kt-hidden-height={195} style={{}}>
+
+                    <div className="menu-item">
+                        <Link href='/admin/'>
+                            <a className="menu-link">
+                                <span className="menu-bullet">
+                                    <span className="bullet bullet-dot" />
+                                </span>
+                                <span className="menu-title">All Jobs</span>
+                            </a>
+                        </Link>
+                    </div>
+                    <div className="menu-item">
+                        <Link href="/admin/jobs/add-job">
+                            <a className="menu-link">
+                                <span className="menu-bullet">
+                                    <span className="bullet bullet-dot" />
+                                </span>
+                                <span className="menu-title">Add Job</span>
+                            </a>
+                        </Link>
+                    </div>
+                </div>
             </div>
         </>
     );

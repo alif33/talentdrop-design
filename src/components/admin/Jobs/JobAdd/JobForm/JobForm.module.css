@@ -1,0 +1,10 @@
+.search__list__area {
+    z-index: 105;
+    width: 96.5%
+}
+
+.icon__position {
+    position: absolute;
+    margin-top: 12px;
+    margin-left: 12px;
+}

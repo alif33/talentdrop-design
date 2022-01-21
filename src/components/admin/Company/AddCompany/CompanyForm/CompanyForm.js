@@ -11,13 +11,15 @@ const CompanyForm = () => {
     const [color, setColor] = useState("#ffffff");
     const [countries, setCountries] = useState(null)
     const [states, setStates] = useState(null)
+    const [timezone, setTimezone] = useState(null)
     const { admins } = useSelector(state => state)
     const { register, watch, handleSubmit, formState: { errors }, reset } = useForm()
 
-    console.log()
+    console.log(timezone)
     useEffect(() => {
         allCountry()
         allState()
+        allTimezone()
 
     }, [watch('country_id')])
 
@@ -38,8 +40,16 @@ const CompanyForm = () => {
                 }
             })
     }
-
+    const allTimezone = () => {
+        getData(`/timezones`)
+            .then(res => {
+                if (res) {
+                    setTimezone(res)
+                }
+            })
+    }
     const onSubmit = async data => {
+
         setDisable(true)
         const formData = new FormData()
 
@@ -55,22 +65,17 @@ const CompanyForm = () => {
         formData.append('twitter_url', data.twitter_url)
         formData.append('linkdin_url', data.linkdin_url)
         formData.append('instagram_url', data.instagram_url)
-
-
-        for (let i = 0; i < data.company_logo?.length; i++) {
-            formData.append('company_logo[]', data.company_logo[i])
-
-        }
-
+        formData.append('image', data.company_logo[0])
         await submitData(formData)
     }
 
 
     const submitData = async data => {
+        setDisable(true)
         postData('/company', data, setDisable)
 
             .then(res => {
-                console.log(res)
+
                 if (res.success) {
                     toast.success(res.message)
                     setDisable(false)
@@ -116,6 +121,8 @@ const CompanyForm = () => {
                             <div className="mb-3 col-12">
                                 <label>Company logo</label>
                                 <input
+                                    required
+                                    accept=".png, .jpg"
                                     {...register("company_logo",
                                         {
                                             required: true
@@ -203,16 +210,25 @@ const CompanyForm = () => {
                                 <span style={styles}>
                                     <i className="fas fa-globe"></i>
                                 </span>
-                                <input
+                                <select
+
+                                    required
                                     {...register("timezone_id",
                                         {
                                             required: true
                                         }
                                     )}
-                                    type='number'
+                                    type='select'
                                     className="form-control"
+
                                     style={{ paddingLeft: '30px' }}
-                                />
+                                >
+                                    <option defaultValue >Select time zone</option>
+                                    {
+                                        timezone?.map((item, index) => <option key={index} value={item.id}>{item.time_zone_area}</option>)
+                                    }
+
+                                </select>
                             </div>
                             {errors.timezone_id && <span className="text-danger">Time zone required</span>}
 
@@ -247,6 +263,7 @@ const CompanyForm = () => {
                                     <i className="fas fa-flag"></i>
                                 </span>
                                 <select
+
                                     onChange={e => console.log(e)}
                                     required
                                     {...register("country_id",
@@ -259,7 +276,7 @@ const CompanyForm = () => {
 
                                     style={{ paddingLeft: '30px' }}
                                 >
-                                    <option selected >Select Country</option>
+                                    <option defaultValue >Select Country</option>
                                     {
                                         countries?.map((item, index) => <option key={index} value={item.id}>{item.country_name}</option>)
                                     }
@@ -277,6 +294,7 @@ const CompanyForm = () => {
                                     <i className="fas fa-map-marker"></i>
                                 </span>
                                 <select
+
                                     required
                                     {...register("state_id",
                                         {
@@ -288,7 +306,7 @@ const CompanyForm = () => {
 
                                     style={{ paddingLeft: '30px' }}
                                 >
-                                    <option selected >Select State</option>
+                                    <option defaultValue>Select State</option>
                                     {
                                         states?.map((item, index) => <option key={index} value={item.id}>{item.state_name}</option>)
                                     }
@@ -323,7 +341,7 @@ const CompanyForm = () => {
                             <label>Twitter</label>
                             <div>
                                 <span style={styles}>
-                                    <i class="fab fa-twitter-square"></i>
+                                    <i className="fab fa-twitter-square"></i>
                                 </span>
                                 <input
                                     {...register("twitter_url",
@@ -365,7 +383,7 @@ const CompanyForm = () => {
                             <label>Instagram (Optional)</label>
                             <div>
                                 <span style={styles}>
-                                    <i class="fab fa-instagram-square"></i>
+                                    <i className="fab fa-instagram-square"></i>
                                 </span>
                                 <input
                                     {...register("instagram_url",
