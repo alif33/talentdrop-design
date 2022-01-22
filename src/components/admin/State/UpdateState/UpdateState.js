@@ -34,7 +34,6 @@ const UpdateState = (props) => {
                         toast.success(res.message)
                         dispatch(setStates(country_id))
                         setDisable(false)
-                        reset()
                     }
                 })
         }

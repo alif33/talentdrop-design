@@ -28,7 +28,7 @@ const UpdateCountry = (props) => {
                         toast.success(res.message)
                         dispatch(setCountries())
                         setDisable(false)
-                        reset()
+
                     }
                 })
         }

@@ -34,7 +34,6 @@ const UpdateZone = (props) => {
                         toast.success(res.message)
                         dispatch(setTimezones(country_id))
                         setDisable(false)
-                        reset()
                     }
                 })
         }

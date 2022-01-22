@@ -28,7 +28,6 @@ const UpdateTag = (props) => {
                         toast.success(res.message)
                         dispatch(setTags())
                         setDisable(false)
-                        reset()
                     }
                 })
         }
