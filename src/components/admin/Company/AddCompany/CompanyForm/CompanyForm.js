@@ -15,7 +15,6 @@ const CompanyForm = () => {
     const { admins } = useSelector(state => state)
     const { register, watch, handleSubmit, formState: { errors }, reset } = useForm()
 
-    console.log(timezone)
     useEffect(() => {
         allCountry()
         allState()
@@ -24,16 +23,15 @@ const CompanyForm = () => {
     }, [watch('country_id')])
 
     const allCountry = () => {
-        getData('/location/countries')
+        getData('/countries')
             .then(res => {
                 if (res) {
                     setCountries(res)
                 }
-
             })
     }
     const allState = () => {
-        getData(`/location/states/${watch('country_id')}`)
+        getData(`/states/${watch('country_id')}`)
             .then(res => {
                 if (res) {
                     setStates(res)
@@ -41,7 +39,7 @@ const CompanyForm = () => {
             })
     }
     const allTimezone = () => {
-        getData(`/timezones`)
+        getData(`/timezones/${watch('country_id')}`)
             .then(res => {
                 if (res) {
                     setTimezone(res)
@@ -203,36 +201,7 @@ const CompanyForm = () => {
                             {errors.employee_number && <span className="text-danger">Employee number required</span>}
 
                         </div>
-                        <div className="mb-3 col-12 col-sm-6">
-                            <label>Time Zone</label>
 
-                            <div>
-                                <span style={styles}>
-                                    <i className="fas fa-globe"></i>
-                                </span>
-                                <select
-
-                                    required
-                                    {...register("timezone_id",
-                                        {
-                                            required: true
-                                        }
-                                    )}
-                                    type='select'
-                                    className="form-control"
-
-                                    style={{ paddingLeft: '30px' }}
-                                >
-                                    <option defaultValue >Select time zone</option>
-                                    {
-                                        timezone?.map((item, index) => <option key={index} value={item.id}>{item.time_zone_area}</option>)
-                                    }
-
-                                </select>
-                            </div>
-                            {errors.timezone_id && <span className="text-danger">Time zone required</span>}
-
-                        </div>
                         <div className="mb-3 col-12 col-sm-6">
                             <label>Founded Date</label>
 
@@ -294,7 +263,7 @@ const CompanyForm = () => {
                                     <i className="fas fa-map-marker"></i>
                                 </span>
                                 <select
-
+                                    disabled={states?.length ? false : true}
                                     required
                                     {...register("state_id",
                                         {
@@ -314,6 +283,36 @@ const CompanyForm = () => {
                                 </select>
                             </div>
                             {errors.state_id && <span className="text-danger">State required</span>}
+
+                        </div>
+                        <div className="mb-3 col-12 col-sm-6">
+                            <label>Time Zone</label>
+
+                            <div>
+                                <span style={styles}>
+                                    <i className="fas fa-globe"></i>
+                                </span>
+                                <select
+                                    disabled={timezone?.length ? false : true}
+                                    required
+                                    {...register("timezone_id",
+                                        {
+                                            required: true
+                                        }
+                                    )}
+                                    type='select'
+                                    className="form-control"
+
+                                    style={{ paddingLeft: '30px' }}
+                                >
+                                    <option defaultValue >Select time zone</option>
+                                    {
+                                        timezone?.map((item, index) => <option key={index} value={item.id}>{item._zone_name_}</option>)
+                                    }
+
+                                </select>
+                            </div>
+                            {errors.timezone_id && <span className="text-danger">Time zone required</span>}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
