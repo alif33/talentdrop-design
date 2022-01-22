@@ -15,11 +15,11 @@ const JobForm = () => {
     const [color, setColor] = useState("#ffffff");
     const { admins } = useSelector(state => state)
     const [companies, setCompanies] = useState([])
-    // const [filterData, setFilterData] = useState([])
-    const [search, setSearch] = useState()
+    const [filterData, setFilterData] = useState([])
+    const [search, setSearch] = useState({})
     const { register, watch, handleSubmit, formState: { errors }, reset } = useForm()
 
-    let filterData = []
+    // let filterData = []
     if (watch('company_id')) {
         const searchWord = watch('company_id')
         filterData = data.filter((value) => {
@@ -80,12 +80,13 @@ const JobForm = () => {
                     <div className='row'>
                         <div className="mb-3 col-12 col-sm-6 position-relative">
                             <label>Company Name</label>
+                            {<h2>{search.name}</h2>}
                             <div>
                                 <span style={styles}>
                                     <i className="fas fa-search"></i>
                                 </span>
                                 <input
-                                    value={search?.name}
+                                    defaultValue={search?.name}
                                     {...register("company_id",
                                         {
                                             required: true
@@ -100,13 +101,19 @@ const JobForm = () => {
                             {filterData.length > 0 &&
                                 <div className={`border rounded px-3 py-4 position-absolute bg-secondary col-11 
                                 search-list-area ${stylesClass.search__list__area}`}>
+
+
+
+
+
                                     <ul className="list-unstyled">
-                                        {filterData.map((item, i) => <li onClick={() => addSearch(item)} className='p-2 btn'>{item.name}</li>)}
+                                        {filterData.map((item, i) => <li onClick={() => addSearch(item)} className='p-2 nav-link'>{item.name}</li>)}
 
                                     </ul>
                                 </div>
 
                             }
+
                             {/* <ul className="list-unstyled">
                                 {filterData?.map((item, i) => <li className='p-2'>{item.name}</li>)}
 

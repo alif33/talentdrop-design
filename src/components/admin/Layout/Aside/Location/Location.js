@@ -1,19 +1,14 @@
-import Link from 'next/link';
+
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { modalToggle } from '../../../../../../store/settings/actions';
-import AddTag from '../../../Tags/AddTag/AddTag';
-
-const Tag = () => {
+import LcoationSubMenu from './LocationSubMenu/LcoationSubMenu';
+const Location = () => {
     const router = useRouter()
     const { pathname } = router
-    console.log(pathname)
-    const [menuItem, setMenuItem] = useState(pathname == '/admin/tags' ? true : false)
-    const dispatch = useDispatch()
-    const { settings } = useSelector(state => state)
-    const [trigger, setTrigger] = useState(false)
+    const [menuItem, setMenuItem] = useState(pathname === '/admin/countries' || pathname === '/admin/states' || pathname === '/admin/timezones' ? true : false)
 
+    console.log(menuItem)
+    console.log(pathname)
     return (
         <>
             <div data-kt-menu-trigger="click" className={`menu-item menu-accordion ${menuItem ? 'hover show' : ''}`}>
@@ -26,38 +21,16 @@ const Tag = () => {
                             </svg>
                         </span>
                     </span>
-                    <span className="menu-title">Tags</span>
+                    <span className="menu-title">Location</span>
                     <span className="menu-arrow" />
                 </span>
-                <div className={`menu-sub menu-sub-accordion menu-active-bg ${menuItem && 'show'}`}>
-                    <div className="menu-item">
-                        <Link href='/admin/tags'>
-                            <a className="menu-link">
-                                <span className="menu-bullet">
-                                    <span className="bullet bullet-dot" />
-                                </span>
-                                <span className="menu-title">All Tags</span>
-                            </a>
-                        </Link>
-                    </div>
-                    <div className="menu-item">
-                        <span onClick={() => {
-                            dispatch(modalToggle(settings.modal))
-                            setTrigger(true)
-                        }} className="menu-link">
-                            <span className="menu-bullet">
-                                <span className="bullet bullet-dot" />
-                            </span>
-                            <span className="menu-title">Add Tag</span>
-                        </span>
-                    </div>
-                    {trigger && <AddTag />}
-
-
+                <div className={`menu-sub menu-sub-accordion menu-active-bg ${menuItem ? 'show' : ''}`} kt-hidden-height={195} style={{}}>
+                    <LcoationSubMenu />
                 </div>
             </div>
+
         </>
     );
 };
 
-export default Tag;
+export default Location;

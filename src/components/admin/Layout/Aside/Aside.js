@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Company from './Company/Company';
 import Jobs from './Jobs/Jobs';
+import Location from './Location/Location';
 import Logo from './Logo/Logo';
 import Tag from './Tag/Tag';
 
@@ -37,6 +38,7 @@ const Aside = () => {
                         <Company></Company>
                         <Jobs></Jobs>
                         <Tag></Tag>
+                        <Location />
                     </div>
                 </div>
             </div>

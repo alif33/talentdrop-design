@@ -1,10 +1,9 @@
-import Companies from "../../../src/components/admin/Company/Companies/Companies";
+import Timezones from "../../../src/components/admin/Timezone/Timezones";
 import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
-
 const index = () => {
     return (
         <>
-            <Companies />
+            <Timezones />
         </>
     );
 };
