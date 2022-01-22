@@ -1,47 +1,65 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { setCountries } from '../../../../store/countries/actions';
 import { modalToggle } from '../../../../store/settings/actions';
-import { setTags } from '../../../../store/tags/actions';
+import { setTimezones } from '../../../../store/timezones/actions';
 import Layout from '../Layout/Layout';
-import AddTag from './AddTag/AddTag';
-import UpdateTag from './UpdateTag/UpdateTag';
+import AddState from './AddTimezone/AddTimezone';
+import UpdateState from './UpdateZone/UpdateZone';
 
-const Tags = () => {
-    const [trigger, setTrigger] = useState(false)
+const Timezones = () => {
     const dispatch = useDispatch()
-    const { tags, settings } = useSelector(state => state)
+    const [trigger, setTrigger] = useState(false)
+    const { timezones, countries, settings } = useSelector(state => state)
     const [currentData, setCurrentData] = useState({ isUpdate: false })
+    const [selectCountry, setSelectCountry] = useState(null)
 
     useEffect(() => {
-        dispatch(setTags())
-    }, [])
+        dispatch(setTimezones(selectCountry))
+        dispatch(setCountries())
+    }, [selectCountry])
 
-    const { tagList } = tags;
+    const { zonesList } = timezones
+    const { countryList } = countries
+    const handleOnChange = (e) => {
+        console.log(e.target.value)
+        setSelectCountry(e.target.value)
+    }
 
 
-    const currentUpdate = (data) => {
+    const countryUpdate = (data) => {
         setTrigger(false)
         dispatch(modalToggle(settings.modal))
         const updateData = { ...currentData }
         updateData.isUpdate = true;
-        updateData.tag_name = data.tag_name
+        updateData._zone_name_ = data._zone_name_
+        updateData.country_id = selectCountry
         updateData.id = data.id
         setCurrentData(updateData)
     }
 
     return (
         <Layout>
-            {trigger && <AddTag></AddTag>}
-            {currentData.isUpdate && <UpdateTag setCurrentData={setCurrentData} currentData={currentData} />}
+
+            {trigger && <AddState />}
+
+            {currentData.isUpdate && <UpdateState setCurrentData={setCurrentData} currentData={currentData} />}
+
             <div className="bg-white container p-5">
-                <div className="d-flex justify-content-between py-5 ">
-                    <h1 className="mt-3">All Tags</h1>
+                <div className="d-flex justify-content-between align-items-center py-5 ">
+                    <h1 className="mt-3">All States</h1>
+                    <div>
+                        <select onChange={handleOnChange} className="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <option defaultValue >Select country</option>
+                            {countryList?.map((item, i) => <option key={i} value={item.id}>{item.country_name}</option>)}
+                        </select>
+                    </div>
                     <button onClick={() => {
                         dispatch(modalToggle(settings.modal))
                         setTrigger(true)
                     }}
                         className="btn btn-primary">
-                        Add tag
+                        Add
                     </button>
                 </div>
                 <div className="t_table_content-wrapper">
@@ -50,22 +68,27 @@ const Tags = () => {
                             <thead className="thead bg-light">
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Tag Name</th>
+                                    <th scope="col">State Name</th>
+
                                     <th className="text-center">Action</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    tagList?.map((item, index) => {
+                                    zonesList?.map((item, index) => {
                                         return (
                                             <tr key={index}>
                                                 <th scope="row" className="row-scope-line">{item.id}</th>
-                                                <td>{item.tag_name}</td>
-                                                <td className="text-center">
-                                                    <i onClick={() => currentUpdate(item)}
+                                                <td>{item._zone_name_}</td>
 
+                                                <td className="text-center">
+                                                    <i onClick={() => {
+                                                        countryUpdate(item)
+
+                                                    }}
                                                         style={{ cursor: 'pointer' }} className="fas fa-edit"></i>
+
                                                 </td>
                                             </tr>
                                         )
@@ -82,5 +105,4 @@ const Tags = () => {
     );
 };
 
-export default Tags;
-
+export default Timezones;

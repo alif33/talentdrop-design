@@ -1,15 +1,16 @@
-import JobCategory from "../../../src/components/admin/JobCategory/JobCategory";
+import States from "../../../src/components/admin/State/States";
 import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
 
 const index = () => {
     return (
         <>
-            <JobCategory></JobCategory>
+            <States />
         </>
     );
 };
 
 export default index;
+
 export const getServerSideProps = adminAuth(context => {
     return {
         props: {}

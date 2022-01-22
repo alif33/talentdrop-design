@@ -1,47 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { modalToggle } from '../../../../store/settings/actions';
-import { setTags } from '../../../../store/tags/actions';
-import Layout from '../Layout/Layout';
-import AddTag from './AddTag/AddTag';
-import UpdateTag from './UpdateTag/UpdateTag';
+import Layout from "../Layout/Layout";
+import { setCountries } from './../../../../store/countries/actions';
+import AddCountry from './AddCountry/AddCountry';
+import UpdateCountry from './UpdateCountry/UpdateCountry';
 
-const Tags = () => {
-    const [trigger, setTrigger] = useState(false)
+const Countries = () => {
     const dispatch = useDispatch()
-    const { tags, settings } = useSelector(state => state)
+    const [trigger, setTrigger] = useState(false)
+    const { countries, settings } = useSelector(state => state)
     const [currentData, setCurrentData] = useState({ isUpdate: false })
-
     useEffect(() => {
-        dispatch(setTags())
+        dispatch(setCountries())
     }, [])
 
-    const { tagList } = tags;
+    const { countryList } = countries
 
 
-    const currentUpdate = (data) => {
+    const countryUpdate = (data) => {
         setTrigger(false)
         dispatch(modalToggle(settings.modal))
         const updateData = { ...currentData }
         updateData.isUpdate = true;
-        updateData.tag_name = data.tag_name
+        updateData.country_name = data.country_name
+        updateData.country_code = data.country_code
         updateData.id = data.id
         setCurrentData(updateData)
     }
 
     return (
         <Layout>
-            {trigger && <AddTag></AddTag>}
-            {currentData.isUpdate && <UpdateTag setCurrentData={setCurrentData} currentData={currentData} />}
+
+            {trigger && <AddCountry />}
+
+            {currentData.isUpdate && <UpdateCountry setCurrentData={setCurrentData} currentData={currentData} />}
+
             <div className="bg-white container p-5">
                 <div className="d-flex justify-content-between py-5 ">
-                    <h1 className="mt-3">All Tags</h1>
+                    <h1 className="mt-3">All Countries</h1>
                     <button onClick={() => {
                         dispatch(modalToggle(settings.modal))
                         setTrigger(true)
                     }}
                         className="btn btn-primary">
-                        Add tag
+                        Add
                     </button>
                 </div>
                 <div className="t_table_content-wrapper">
@@ -50,22 +53,27 @@ const Tags = () => {
                             <thead className="thead bg-light">
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Tag Name</th>
+                                    <th scope="col">Counry Name</th>
+                                    <th scope="col">Country Code</th>
                                     <th className="text-center">Action</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    tagList?.map((item, index) => {
+                                    countryList?.map((item, index) => {
                                         return (
                                             <tr key={index}>
                                                 <th scope="row" className="row-scope-line">{item.id}</th>
-                                                <td>{item.tag_name}</td>
+                                                <td>{item.country_name}</td>
+                                                <td>{item.country_code}</td>
                                                 <td className="text-center">
-                                                    <i onClick={() => currentUpdate(item)}
+                                                    <i onClick={() => {
+                                                        countryUpdate(item)
 
+                                                    }}
                                                         style={{ cursor: 'pointer' }} className="fas fa-edit"></i>
+
                                                 </td>
                                             </tr>
                                         )
@@ -82,5 +90,4 @@ const Tags = () => {
     );
 };
 
-export default Tags;
-
+export default Countries;

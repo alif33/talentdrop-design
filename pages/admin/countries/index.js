@@ -1,10 +1,10 @@
-import Companies from "../../../src/components/admin/Company/Companies/Companies";
+import Countries from "../../../src/components/admin/Country/Countries";
 import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
 
 const index = () => {
     return (
         <>
-            <Companies />
+            <Countries></Countries>
         </>
     );
 };
