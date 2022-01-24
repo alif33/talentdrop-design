@@ -12,19 +12,28 @@ const CompanyForm = () => {
     const [countries, setCountries] = useState(null)
     const [states, setStates] = useState(null)
     const [timezone, setTimezone] = useState(null)
+    const [info, setInfo] = useState({
+        company_name: '',
+        company_description: '',
+        website_url: '',
+        employee_number: '',
+        timezone_id: '',
+        founded_date: '',
+        country_id: '',
+        state_id: '',
+        facebook_url: '',
+        twitter_url: '',
+        linkdin_url: '',
+        instagram_url: ''
+    })
     const { admins } = useSelector(state => state)
-    const { register, watch, handleSubmit, formState: { errors }, reset } = useForm()
 
-    console.log(timezone)
     useEffect(() => {
         allCountry()
-        allState()
-        allTimezone()
-
-    }, [watch('country_id')])
+    }, [])
 
     const allCountry = () => {
-        getData('/location/countries')
+        getData('/countries')
             .then(res => {
                 if (res) {
                     setCountries(res)
@@ -33,7 +42,7 @@ const CompanyForm = () => {
             })
     }
     const allState = () => {
-        getData(`/location/states/${watch('country_id')}`)
+        getData(`/states/${info.country_id}`)
             .then(res => {
                 if (res) {
                     setStates(res)
@@ -41,7 +50,7 @@ const CompanyForm = () => {
             })
     }
     const allTimezone = () => {
-        getData(`/timezones`)
+        getData(`/timezones/${info.country_id}`)
             .then(res => {
                 if (res) {
                     setTimezone(res)
@@ -89,11 +98,13 @@ const CompanyForm = () => {
         marginTop: '12px',
         marginLeft: '12px',
     }
-
+    console.log(info);
+    console.log(states);
+    console.log(timezone);
     return (
         <>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={onSubmit}>
                 <div className="row">
                     <div className='row'>
                         <div className='col-12 col-sm-6'>
@@ -105,17 +116,16 @@ const CompanyForm = () => {
                                         <i className="fa fa-building"></i>
                                     </span>
                                     <input
-                                        {...register("company_name",
-                                            {
-                                                required: true
-                                            }
-                                        )}
+                                        name="company_name"
+                                        onChange={e => setInfo({
+                                            ...info,
+                                            company_name: e.target.value
+                                        })}
                                         className="form-control"
                                         placeholder="Type company name"
                                         style={{ paddingLeft: '30px' }}
                                     />
                                 </div>
-                                {errors.company_name && <span className="text-danger">Company name required</span>}
 
                             </div>
                             <div className="mb-3 col-12">
@@ -123,16 +133,11 @@ const CompanyForm = () => {
                                 <input
                                     required
                                     accept=".png, .jpg"
-                                    {...register("company_logo",
-                                        {
-                                            required: true
-                                        }
-                                    )}
+                                    name="company_logo"
                                     type='file'
                                     className="form-control"
                                     placeholder="Type company name"
                                 />
-                                {errors.category_logo && <span className="text-danger">Company name required</span>}
 
                             </div>
 
@@ -140,24 +145,22 @@ const CompanyForm = () => {
                         <div className="mb-3 col-12 col-sm-6 position-relative" >
                             <label>Company Description</label>
                             <textarea
-                                // minLength='100'
+                                name="company_description"
+                                onChange={e => setInfo({
+                                    ...info,
+                                    company_description: e.target.value
+                                })}
                                 maxLength="250"
                                 required
                                 rows="4"
-                                {...register("company_description",
-                                    {
-                                        required: true,
-                                    }
-                                )}
                                 className="form-control"
                                 placeholder="Description"
                                 style={{ resize: 'none' }}
                             />
                             <p style={{ position: 'absolute', top: '76%', left: '89.5%' }}>
 
-                                <span className={`${watch().company_description?.length === 250 && 'text-danger'}`}>{watch().company_description?.length}/250</span>
+                                {/* <span className={`${watch().company_description?.length === 250 && 'text-danger'}`}>{watch().company_description?.length}/250</span> */}
                             </p>
-                            {errors.company_description && <span className="text-danger">Description is required</span>}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
@@ -168,17 +171,17 @@ const CompanyForm = () => {
                                     <i className="fas fa-globe"></i>
                                 </span>
                                 <input
-                                    {...register("website_url",
-                                        {
-                                            required: true, pattern: /^(ftp|http|https):\/\/[^ "]+$/
-                                        }
-                                    )}
+                                    name="website_url"
+                                    onChange={e => setInfo({
+                                        ...info,
+                                        website_url: e.target.value
+                                    })}
+                                    value={info.website_url}
                                     className="form-control"
                                     placeholder="https://www.website.com"
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {errors.website_url && <span className="text-danger">Website required with https://</span>}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
@@ -189,19 +192,18 @@ const CompanyForm = () => {
                                     <i className="fas fa-user"></i>
                                 </span>
                                 <input
-                                    {...register("employee_number",
-                                        {
-                                            required: true
-                                        }
-                                    )}
+                                    name="employee_number"
+                                    onChange={e => setInfo({
+                                        ...info,
+                                        employee_number: e.target.value
+                                    })}
                                     type='number'
+                                    value={info.employee_number}
                                     className="form-control"
                                     placeholder="Type Employe number"
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {errors.employee_number && <span className="text-danger">Employee number required</span>}
-
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
                             <label>Time Zone</label>
@@ -213,25 +215,23 @@ const CompanyForm = () => {
                                 <select
 
                                     required
-                                    {...register("timezone_id",
-                                        {
-                                            required: true
-                                        }
-                                    )}
+                                    name="timezone_id"
+                                    onChange={e => setInfo({
+                                        ...info,
+                                        timezone_id: e.target.value
+                                    })}
                                     type='select'
                                     className="form-control"
 
                                     style={{ paddingLeft: '30px' }}
                                 >
-                                    <option defaultValue >Select time zone</option>
+                                    <option >Select time zone</option>
                                     {
                                         timezone?.map((item, index) => <option key={index} value={item.id}>{item.time_zone_area}</option>)
                                     }
 
                                 </select>
                             </div>
-                            {errors.timezone_id && <span className="text-danger">Time zone required</span>}
-
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
                             <label>Founded Date</label>
@@ -241,19 +241,17 @@ const CompanyForm = () => {
                                     <i className="fas fa-calendar-alt"></i>
                                 </span>
                                 <input
-                                    {...register("founded_date",
-                                        {
-                                            required: true
-                                        }
-                                    )}
+                                    name="founded_date"
+                                    onChange={e => setInfo({
+                                        ...info,
+                                        founded_date: e.target.value
+                                    })}
                                     type='date'
                                     className="form-control"
 
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {errors.founded_date && <span className="text-danger">Founded date required</span>}
-
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
                             <label>Country</label>
@@ -263,28 +261,28 @@ const CompanyForm = () => {
                                     <i className="fas fa-flag"></i>
                                 </span>
                                 <select
-
-                                    onChange={e => console.log(e)}
                                     required
-                                    {...register("country_id",
-                                        {
-                                            required: true
-                                        }
-                                    )}
+                                    name="country_id"
+                                    onChange={e => {
+                                        setInfo({
+                                            ...info,
+                                            country_id: e.target.value
+                                        })
+                                        allState()
+                                        allTimezone()
+                                    }}
                                     type='select'
                                     className="form-control"
 
                                     style={{ paddingLeft: '30px' }}
                                 >
-                                    <option defaultValue >Select Country</option>
+                                    <option >Select Country</option>
                                     {
                                         countries?.map((item, index) => <option key={index} value={item.id}>{item.country_name}</option>)
                                     }
                                 </select>
 
                             </div>
-                            {errors.country_id && <span className="text-danger">Country is required</span>}
-
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
                             <label>State</label>
@@ -296,24 +294,23 @@ const CompanyForm = () => {
                                 <select
 
                                     required
-                                    {...register("state_id",
-                                        {
-                                            required: true
-                                        }
-                                    )}
+                                    name="state_id"
+                                    onChange={e => setInfo({
+                                        ...info,
+                                        state_id: e.target.value
+                                    })}
                                     type='select'
                                     className="form-control"
-
+                                    disabled={!states?.length}
                                     style={{ paddingLeft: '30px' }}
                                 >
-                                    <option defaultValue>Select State</option>
+                                    <option >Select State</option>
                                     {
                                         states?.map((item, index) => <option key={index} value={item.id}>{item.state_name}</option>)
                                     }
 
                                 </select>
                             </div>
-                            {errors.state_id && <span className="text-danger">State required</span>}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
@@ -323,19 +320,16 @@ const CompanyForm = () => {
                                     <i className="fab fa-facebook-square"></i>
                                 </span>
                                 <input
-                                    {...register("facebook_url",
-                                        {
-                                            required: true, pattern: /^(ftp|http|https):\/\/[^ "]+$/
-                                        }
-                                    )}
-
+                                    name="facebook_url"
+                                    onChange={e => setInfo({
+                                        ...info,
+                                        facebook_url: e.target.value
+                                    })}
                                     className="form-control"
                                     placeholder="Facebook link"
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {errors.facebook_url && <span className="text-danger">Facebook required with https://</span>}
-
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
                             <label>Twitter</label>
@@ -344,19 +338,16 @@ const CompanyForm = () => {
                                     <i className="fab fa-twitter-square"></i>
                                 </span>
                                 <input
-                                    {...register("twitter_url",
-                                        {
-                                            required: true, pattern: /^(ftp|http|https):\/\/[^ "]+$/
-                                        }
-                                    )}
-
+                                    name="twitter_url"
+                                    onChange={e => setInfo({
+                                        ...info,
+                                        twitter_url: e.target.value
+                                    })}
                                     className="form-control"
                                     placeholder="Twitter link"
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {errors.twitter_url && <span className="text-danger">Twitter required with https://</span>}
-
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
                             <label>Linkdin</label>
@@ -365,19 +356,16 @@ const CompanyForm = () => {
                                     <i className="fab fa-linkedin"></i>
                                 </span>
                                 <input
-                                    {...register("linkdin_url",
-                                        {
-                                            required: true, pattern: /^(ftp|http|https):\/\/[^ "]+$/
-                                        }
-                                    )}
-
+                                    name="linkdin_url"
+                                    onChange={e => setInfo({
+                                        ...info,
+                                        linkdin_url: e.target.value
+                                    })}
                                     className="form-control"
                                     placeholder="Facebook link"
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {errors.linkdin_url && <span className="text-danger">Linkdin required with https://</span>}
-
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
                             <label>Instagram (Optional)</label>
@@ -386,19 +374,16 @@ const CompanyForm = () => {
                                     <i className="fab fa-instagram-square"></i>
                                 </span>
                                 <input
-                                    {...register("instagram_url",
-                                        {
-                                            pattern: /^(ftp|http|https):\/\/[^ "]+$/
-                                        }
-                                    )}
-
+                                    name="instagram_url"
+                                    onChange={e => setInfo({
+                                        ...info,
+                                        instagram_url: e.target.value
+                                    })}
                                     className="form-control"
                                     placeholder="Instagram link"
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {errors.instagram_url && <span className="text-danger">Instagram required with https://</span>}
-
                         </div>
 
                     </div>
