@@ -7,9 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import BeatLoader from "react-spinners/BeatLoader";
 import Cookies from 'universal-cookie';
 import { adminLogin } from '../../../../store/admins/actions';
-import { modalToggle } from '../../../../store/settings/actions';
 import { postData } from '../../../../__lib__/helpers/HttpService';
-import ResetPassword from './ResetPassword';
 
 
 export default function AdminLogin() {
@@ -20,7 +18,6 @@ export default function AdminLogin() {
     const dispatch = useDispatch()
     const [disable, setDisable] = useState(false)
     const { settings } = useSelector(state => state)
-    const [trigger, setTrigger] = useState(false)
     const { register, handleSubmit, formState: { errors }, } = useForm();
 
     const onSubmit = data => {
@@ -54,8 +51,6 @@ export default function AdminLogin() {
                         className="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" noValidate="novalidate" id="kt_sign_in_form" action="#">
                         <div className="text-center mb-10">
                             <h1 className="text-dark mb-3">Sign In to Talentdrop</h1>
-                            <div className="text-gray-400 fw-bold fs-4">New Here?
-                                <a href="authentication/flows/basic/sign-up.html" className="link-primary fw-bolder">Create an Account</a></div>
                         </div>
 
                         <div className="fv-row mb-10 fv-plugins-icon-container">
@@ -73,15 +68,8 @@ export default function AdminLogin() {
                             <label className="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
                             <input {...register("password", { required: true })}
                                 className="form-control form-control-lg form-control-solid"
-                                autoComplete='off' type='password' name="password" />
-                            <div className="d-flex justify-content-end">
-                                <span onClick={() => {
-                                    dispatch(modalToggle(settings.modal))
-                                    setTrigger(true)
-                                }} className="link-primary fs-6 fw-bolder">Forgot Password ?</span>
-
-
-                            </div>
+                                autoComplete='off' type='password' name="password"
+                            />
                             <div className="fv-plugins-message-container" >
                                 {errors.password && <span className="text-danger">Password is required</span>}
                             </div>
@@ -103,7 +91,6 @@ export default function AdminLogin() {
                             <a>← Home</a>
                         </Link>
                     </form>
-                    {trigger && <ResetPassword></ResetPassword>}
                 </div>
             </div >
         </>
