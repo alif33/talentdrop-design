@@ -1,10 +1,9 @@
-import React from 'react';
-
+import Layout from '../../Layout/Layout'
 const Jobs = () => {
     return (
-        <div>
-            <h1>this is jobs</h1>
-        </div>
+        <Layout>
+
+        </Layout>
     );
 };
 

@@ -1,6 +1,5 @@
-import Layout from '../../src/components/client/layout';
-import Signup from '../../src/components/client/signup/Signup';
-
+import Signup from '../../../src/components/client/signup/Signup';
+import Layout from '../../src/components/client/Layout';
 export default function index() {
     return (
         <Layout>

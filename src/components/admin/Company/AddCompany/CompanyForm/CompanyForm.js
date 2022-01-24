@@ -9,22 +9,25 @@ const CompanyForm = () => {
     const [disable, setDisable] = useState(false)
     const [loading, setLoading] = useState(true);
     const [color, setColor] = useState("#ffffff");
-    const [countries, setCountries] = useState(null)
-    const [states, setStates] = useState(null)
-    const [timezone, setTimezone] = useState(null)
+    const [countries, setCountries] = useState([])
+    const [states, setStates] = useState([])
+    const [timezones, setTimezones] = useState([])
     const { admins } = useSelector(state => state)
     const { register, watch, handleSubmit, formState: { errors }, reset } = useForm()
 
-    console.log(timezone)
+    
     useEffect(() => {
         allCountry()
+      if(watch('country_id')){
         allState()
         allTimezone()
+      }
+        
 
     }, [watch('country_id')])
 
     const allCountry = () => {
-        getData('/location/countries')
+        getData('/countries')
             .then(res => {
                 if (res) {
                     setCountries(res)
@@ -33,7 +36,7 @@ const CompanyForm = () => {
             })
     }
     const allState = () => {
-        getData(`/location/states/${watch('country_id')}`)
+        getData(`/states/${watch('country_id')}`)
             .then(res => {
                 if (res) {
                     setStates(res)
@@ -41,15 +44,15 @@ const CompanyForm = () => {
             })
     }
     const allTimezone = () => {
-        getData(`/timezones`)
+        getData(`/timezones/${watch('country_id')}`)
             .then(res => {
                 if (res) {
-                    setTimezone(res)
+                    setTimezones(res)
                 }
             })
     }
     const onSubmit = async data => {
-
+        console.log(data)
         setDisable(true)
         const formData = new FormData()
 
@@ -155,7 +158,7 @@ const CompanyForm = () => {
                             />
                             <p style={{ position: 'absolute', top: '76%', left: '89.5%' }}>
 
-                                <span className={`${watch().company_description?.length === 250 && 'text-danger'}`}>{watch().company_description?.length}/250</span>
+                                <span className={`${watch().company_description?.length === 250 && 'text-danger'}`}>{watch().company_description?.length || 0}/250</span>
                             </p>
                             {errors.company_description && <span className="text-danger">Description is required</span>}
 
@@ -203,36 +206,7 @@ const CompanyForm = () => {
                             {errors.employee_number && <span className="text-danger">Employee number required</span>}
 
                         </div>
-                        <div className="mb-3 col-12 col-sm-6">
-                            <label>Time Zone</label>
-
-                            <div>
-                                <span style={styles}>
-                                    <i className="fas fa-globe"></i>
-                                </span>
-                                <select
-
-                                    required
-                                    {...register("timezone_id",
-                                        {
-                                            required: true
-                                        }
-                                    )}
-                                    type='select'
-                                    className="form-control"
-
-                                    style={{ paddingLeft: '30px' }}
-                                >
-                                    <option defaultValue >Select time zone</option>
-                                    {
-                                        timezone?.map((item, index) => <option key={index} value={item.id}>{item.time_zone_area}</option>)
-                                    }
-
-                                </select>
-                            </div>
-                            {errors.timezone_id && <span className="text-danger">Time zone required</span>}
-
-                        </div>
+                      
                         <div className="mb-3 col-12 col-sm-6">
                             <label>Founded Date</label>
 
@@ -294,7 +268,7 @@ const CompanyForm = () => {
                                     <i className="fas fa-map-marker"></i>
                                 </span>
                                 <select
-
+                                    disabled={ states.length > 0 ? false : true}
                                     required
                                     {...register("state_id",
                                         {
@@ -314,6 +288,36 @@ const CompanyForm = () => {
                                 </select>
                             </div>
                             {errors.state_id && <span className="text-danger">State required</span>}
+
+                        </div>
+                        <div className="mb-3 col-12 col-sm-6">
+                            <label>Time Zone</label>
+
+                            <div>
+                                <span style={styles}>
+                                    <i className="fas fa-globe"></i>
+                                </span>
+                                <select
+                                disabled={ timezones.length > 0 ? false : true}
+                                    required
+                                    {...register("timezone_id",
+                                        {
+                                            required: true
+                                        }
+                                    )}
+                                    type='select'
+                                    className="form-control"
+
+                                    style={{ paddingLeft: '30px' }}
+                                >
+                                    <option defaultValue >Select time zone</option>
+                                    {
+                                        timezones?.map((item, index) => <option key={index} value={item.id}>{item._zone_name_}</option>)
+                                    }
+
+                                </select>
+                            </div>
+                            {errors.timezone_id && <span className="text-danger">Time zone required</span>}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">

@@ -23,6 +23,7 @@ const AddState = () => {
     }, [])
 
     const onSubmit = async data => {
+        console.log(data);
         setDisable(true)
         if (data) {
             authPost('/state', data, admins.token)
@@ -66,7 +67,7 @@ const AddState = () => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="mb-3">
                                 <select
-                                    {...register("country_name",
+                                    {...register("country_id",
                                         {
                                             required: true,
                                         }

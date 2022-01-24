@@ -21,12 +21,12 @@ const Jobs = () => {
                 <div className={`menu-sub menu-sub-accordion menu-active-bg ${menuItem ? 'show' : ''}`} kt-hidden-height={195} style={{}}>
 
                     <div className="menu-item">
-                        <Link href='/admin/'>
+                        <Link href='/admin/jobs'>
                             <a className="menu-link">
                                 <span className="menu-bullet">
                                     <span className="bullet bullet-dot" />
                                 </span>
-                                <span className="menu-title">All Jobs</span>
+                                <span className="menu-title">Jobs</span>
                             </a>
                         </Link>
                     </div>

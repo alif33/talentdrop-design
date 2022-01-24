@@ -21,7 +21,7 @@ const Location = () => {
                             </svg>
                         </span>
                     </span>
-                    <span className="menu-title">Location</span>
+                    <span className="menu-title">Locations</span>
                     <span className="menu-arrow" />
                 </span>
                 <div className={`menu-sub menu-sub-accordion menu-active-bg ${menuItem ? 'show' : ''}`} kt-hidden-height={195} style={{}}>

@@ -1,71 +1,99 @@
 
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Select from 'react-select';
 import { BeatLoader } from 'react-spinners';
-import { postData } from './../../../../../../__lib__/helpers/HttpService';
+import { setTags } from '../../../../../../store/tags/actions';
+import { getData, postData } from './../../../../../../__lib__/helpers/HttpService';
 import stylesClass from './JobForm.module.css';
-const data = [
-    { id: 1, name: 'Jahid' }, { id: 2, name: 'Jahid' }, { id: 3, name: 'Rasel' }, { id: 4, name: 'Nasir' }, { id: 5, name: 'Monir' }
-]
+
+
+
+
 const JobForm = () => {
     const [disable, setDisable] = useState(false)
     const [loading, setLoading] = useState(true);
     const [color, setColor] = useState("#ffffff");
-    const { admins } = useSelector(state => state)
+    const { admins, tags } = useSelector(state => state)
     const [companies, setCompanies] = useState([])
     const [filterData, setFilterData] = useState([])
     const [search, setSearch] = useState({})
-    const { register, watch, handleSubmit, formState: { errors }, reset } = useForm()
-
-    // let filterData = []
-    if (watch('company_id')) {
-        const searchWord = watch('company_id')
-        filterData = data.filter((value) => {
-            return value.name.includes(searchWord)
-        })
-
-
-    }
-
+    const [trigger, setTrigger] = useState(false)
+    const [handleFormData, setHandleFormData] = useState({})
+    const [selectTags, setSelectTags] = useState([])
+    const dispatch = useDispatch()
     useEffect(() => {
-        // getData('/companies')
-        //     .then(res => {
-        //         if (res) {
-        //             setCompanies(res)
-        //         }
-        //     })
+        dispatch(setTags())
+        getData('/companies')
+            .then(res => {
+                if (res) {
+                    setCompanies(res)
+                }
+            })
     }, [])
 
+    const searchCompanies = (e) => {
+        const searchWord = e.target.value
+        if (searchWord) {
+            
+            setTrigger(true)
+        } else {
+            setTrigger(false)
+        }
+        const matched = companies?.filter((value) => {
+            return value.company_name.toLowerCase().includes(searchWord.toLowerCase())
+        })
+        setFilterData(matched)
+    }
     const addSearch = (data) => {
         setSearch(data)
-
+        setTrigger(false)
     }
-    console.log(search)
-    const onSubmit = async data => {
+    const handleSelectTags = (e) => {
+        setSelectTags(e)
+    }
+    console.log(selectTags)
+    const handleForm = (e) => {
+        const name = e.target.name
+        const value = e.target.value
+        setHandleFormData(values => ({ ...values, [name]: value }))
+    }
 
+    const handleSubmit =  (e) => {
+        e.preventDefault()
         setDisable(true)
-        postData('/job', data, setDisable)
+        const formData = new FormData()
+
+        formData.append('company_id', search.id)
+        formData.append('job_title', handleFormData.job_title)
+        formData.append('job_salary', handleFormData.job_salary)
+        formData.append('job_description', handleFormData.job_description)
+        formData.append('job_vacancy', handleFormData.job_vacancy)
+        formData.append('job_bounty', handleFormData.job_bounty)
+      
+  
+        for (let i = 0; i < selectTags?.length; i++) {
+            formData.append('tags[]', selectTags[i].value)
+                console.log(selectTags[i].value)
+          }
+
+        postData('/job', formData, setDisable)
             .then(res => {
                 console.log(res)
                 if (res.success) {
                     toast.success(res.message)
                     setDisable(false)
-                    reset()
                 }
             })
-        // const formData = new FormData()
-
-        // await submitData(formData)
-
     }
 
+   const { tagList } = tags
+    const tagOption = tagList?.map(tag => ({
+        label: tag.tag_name,
+        value: tag.id
+    }));
 
-    // const submitData = async data => {
-
-
-    // }
     const styles = {
         position: 'absolute',
         marginTop: '12px',
@@ -75,49 +103,55 @@ const JobForm = () => {
     return (
         <>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={e => handleSubmit(e)}>
                 <div className="row">
                     <div className='row'>
                         <div className="mb-3 col-12 col-sm-6 position-relative">
-                            <label>Company Name</label>
-                            {<h2>{search.name}</h2>}
-                            <div>
-                                <span style={styles}>
-                                    <i className="fas fa-search"></i>
-                                </span>
-                                <input
-                                    defaultValue={search?.name}
-                                    {...register("company_id",
-                                        {
-                                            required: true
-                                        }
-                                    )}
-                                    className="form-control"
-                                    placeholder="Search here"
-                                    style={{ paddingLeft: '30px' }}
-                                />
-                            </div>
-                            {errors.company_id && <span className="text-danger">Company name required</span>}
-                            {filterData.length > 0 &&
-                                <div className={`border rounded px-3 py-4 position-absolute bg-secondary col-11 
+                            <div className="row">
+                                <div className='col-6'>
+                                    <label>Company Name</label>
+
+                                    <div>
+                                        <span style={styles}>
+                                            <i className="fas fa-search"></i>
+                                        </span>
+                                        <input
+
+                                            onChange={searchCompanies}
+                                            className="form-control"
+                                            placeholder="Search here"
+                                            style={{ paddingLeft: '30px' }}
+                                        />
+                                    </div>
+                                    {/* {errors.company_id && <span className="text-danger">Company name required</span>} */}
+                                    {trigger &&
+                                        <div className={`border rounded px-3 pt-3  position-absolute bg-white col-11 
                                 search-list-area ${stylesClass.search__list__area}`}>
 
-
-
-
-
-                                    <ul className="list-unstyled">
-                                        {filterData.map((item, i) => <li onClick={() => addSearch(item)} className='p-2 nav-link'>{item.name}</li>)}
-
-                                    </ul>
+                                            <ul className="list-unstyled">
+                                                {filterData.map((item, i) => <li key={i} onClick={() => addSearch(item)} className='p-2 bg-secondary m-2 rounded-1'>{item.company_name}</li>)}
+                                                {filterData.length === 0 && <li>Company not found</li>}
+                                            </ul>
+                                        </div>
+                                    }
                                 </div>
+                                <div className="col-6">
+                                    <label></label>
 
-                            }
+                                    <div>
+                                        <span style={styles}>
 
-                            {/* <ul className="list-unstyled">
-                                {filterData?.map((item, i) => <li className='p-2'>{item.name}</li>)}
+                                        </span>
+                                        <input
+                                            disabled
+                                            className="form-control"
+                                            placeholder="Name here"
+                                            defaultValue={search.company_name}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
 
-                            </ul> */}
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
                             <label>Job Title</label>
@@ -127,18 +161,14 @@ const JobForm = () => {
                                     <i className="fas fa-pen"></i>
                                 </span>
                                 <input
-                                    {...register("job_title",
-                                        {
-                                            required: true
-                                        }
-                                    )}
-
+                                    name="job_title"
+                                    onChange={handleForm}
                                     className="form-control"
                                     placeholder="Job title here"
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {errors.job_title && <span className="text-danger">Job title required</span>}
+                            {/* {errors.job_title && <span className="text-danger">Job title required</span>} */}
 
                         </div>
                         <div className="col-12 col-sm-6">
@@ -149,18 +179,15 @@ const JobForm = () => {
                                         <i className="fas fa-money-check"></i>
                                     </span>
                                     <input
-                                        {...register("job_salary",
-                                            {
-                                                required: true
-                                            }
-                                        )}
+                                    name="job_salary"
+                                        onChange={handleForm}
                                         type="number"
                                         className="form-control"
                                         placeholder="Job salary"
                                         style={{ paddingLeft: '30px' }}
                                     />
                                 </div>
-                                {errors.job_salary && <span className="text-danger">Job Salary required</span>}
+                                {/* {errors.job_salary && <span className="text-danger">Job Salary required</span>} */}
 
                             </div>
                             <div className="mb-3 col-12 col-sm-12">
@@ -170,18 +197,15 @@ const JobForm = () => {
                                         <i className="fas fa-users"></i>
                                     </span>
                                     <input
-                                        {...register("job_vacancy",
-                                            {
-                                                required: true
-                                            }
-                                        )}
+                                    name="job_vacancy"
+                                        onChange={handleForm}
                                         type="number"
                                         className="form-control"
                                         placeholder="Job vacancy"
                                         style={{ paddingLeft: '30px' }}
                                     />
                                 </div>
-                                {errors.job_vacancy && <span className="text-danger">Job vacancy required</span>}
+                                {/* {errors.job_vacancy && <span className="text-danger">Job vacancy required</span>} */}
 
                             </div>
                             <div className="mb-3 col-12 col-sm-12">
@@ -191,18 +215,14 @@ const JobForm = () => {
                                         <i className="fas fa-hand-holding-usd"></i>
                                     </span>
                                     <input
-                                        {...register("job_bounty",
-                                            {
-                                                required: true
-                                            }
-                                        )}
-
+                                        onChange={handleForm}
+                                        name="job_bounty"
                                         className="form-control"
                                         placeholder="Job bounty"
                                         style={{ paddingLeft: '30px' }}
                                     />
                                 </div>
-                                {errors.job_bounty && <span className="text-danger">Job bounty is required</span>}
+                                {/* {errors.job_bounty && <span className="text-danger">Job bounty is required</span>} */}
 
                             </div>
                         </div>
@@ -210,25 +230,38 @@ const JobForm = () => {
                             <label>Job Description</label>
                             <textarea
                                 // minLength='100'
+                                onChange={handleForm}
+                                name="job_description"
                                 maxLength="250"
                                 required
-
-                                {...register("job_description",
-                                    {
-                                        required: true,
-                                    }
-                                )}
                                 className="form-control"
                                 placeholder="Description"
                                 style={{ resize: 'none', height: '187px' }}
                             />
                             <p style={{ position: 'absolute', top: '76%', left: '89.5%' }}>
 
-                                <span className={`${watch().job_description?.length === 250 && 'text-danger'}`}>{watch().job_description?.length}/250</span>
+                                <span className={`${handleFormData.job_description?.length === 250 && 'text-danger'}`}>{handleFormData.job_description?.length || 0}/250</span>
                             </p>
-                            {errors.job_description && <span className="text-danger">Description is required</span>}
+                            {/* {errors.job_description && <span className="text-danger">Description is required</span>} */}
 
                         </div>
+                        <div className="mb-3  col-12 col-sm-6">
+                            <label>Select Tags</label>
+                            <div>
+
+                                <Select
+                                    onChange={handleSelectTags}
+                                   
+                                    isMulti
+                                    name="colors"
+                                    options={tagOption}
+                                    className="basic-multi-select"
+                                    classNamePrefix="select"
+                                />
+                            </div>
+                            {/* {errors.job_vacancy && <span className="text-danger">Job vacancy required</span>} */}
+                        </div>
+
 
                     </div>
 

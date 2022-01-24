@@ -2,7 +2,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
 import * as Yup from 'yup';
 import styles from './Signup.module.css';
-
+import BeatLoader from "react-spinners/BeatLoader";
+import { useState } from 'react';
 export default function Signup() {
 
   // form validation rules 
@@ -18,10 +19,29 @@ export default function Signup() {
 
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
+
+
+  const [loading, setLoading] = useState(true);
+  const [color, setColor] = useState("#ffffff");
+  const [disable, setDisable] = useState(false)
   const { register, handleSubmit, watch, formState: { errors } } = useForm(formOptions);
 
   const onSubmit = data => {
-    console.log(data)
+
+    setDisable(true)
+
+    postData('/user/login', data, setDisable)
+      .then(res => {
+        if (res?.success) {
+          cookies.set("user_token", res.token, { path: '/' })
+          toast.success('Login Success')
+          dispatch(userLogin({
+            token: res.token,
+            admin: res.admin
+          }))
+          router.push("/user/dashboard")
+        }
+      })
   };
 
   return (
@@ -44,7 +64,15 @@ export default function Signup() {
             <input name="confirmation_password" type="password" {...register('confirmation_password')} placeholder='Confirmation password' className={` ${errors.confirmPassword ? 'is-invalid' : ''}`} />
             <div className="invalid-feedback">{errors.confirmation_password?.message}</div>
 
-            <button type="submit">Sign Up</button>
+            <button
+              disabled={disable}
+              type="submit"
+              id="kt_sign_in_submit" className="btn btn-lg btn-primary fw-bolder me-3 my-2">
+              <span className="indicator-label">
+                {disable ? <BeatLoader color={color} loading={loading} size={12} /> : 'Send Message'}
+
+              </span>
+            </button>
           </form>
         </div>
       </div >

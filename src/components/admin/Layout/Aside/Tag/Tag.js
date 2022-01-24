@@ -8,7 +8,6 @@ import AddTag from '../../../Tags/AddTag/AddTag';
 const Tag = () => {
     const router = useRouter()
     const { pathname } = router
-    console.log(pathname)
     const [menuItem, setMenuItem] = useState(pathname == '/admin/tags' ? true : false)
     const dispatch = useDispatch()
     const { settings } = useSelector(state => state)

@@ -9,8 +9,7 @@ export function userAuth(gssp) {
             if (!cookies.user_token) {
                 return {
                     redirect: {
-                        destination: '/signin',
-
+                        destination: '/user/login',
                     }
                 }
             }
@@ -18,7 +17,7 @@ export function userAuth(gssp) {
         } else {
             return {
                 redirect: {
-                    destination: '/signin',
+                    destination: '/user/login',
 
                 }
             }

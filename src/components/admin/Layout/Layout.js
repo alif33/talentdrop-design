@@ -19,7 +19,6 @@ const Layout = ({ children }) => {
                     <Aside />
                     <div className="wrapper d-flex flex-column flex-row-fluid">
                         <Header />
-
                         <Content>
                             {children}
                         </Content>

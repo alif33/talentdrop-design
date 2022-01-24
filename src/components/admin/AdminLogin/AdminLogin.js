@@ -22,6 +22,7 @@ export default function AdminLogin() {
     const { settings } = useSelector(state => state)
     const [trigger, setTrigger] = useState(false)
     const { register, handleSubmit, formState: { errors }, } = useForm();
+
     const onSubmit = data => {
         setDisable(true)
         postData('/admin/login', data, setDisable)

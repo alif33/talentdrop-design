@@ -26,7 +26,7 @@ const Company = () => {
                                 <span className="menu-bullet">
                                     <span className="bullet bullet-dot" />
                                 </span>
-                                <span className="menu-title">All Companies</span>
+                                <span className="menu-title">Companies</span>
                             </a>
                         </Link>
                     </div>

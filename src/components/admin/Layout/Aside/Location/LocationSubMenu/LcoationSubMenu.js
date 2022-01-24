@@ -16,18 +16,23 @@ const LcoationSubMenu = () => {
     const dispatch = useDispatch()
     const { settings } = useSelector(state => state)
 
-    console.log(trigger)
     return (
         <>
             <div data-kt-menu-trigger="click" className={`menu-item menu-accordion ${countryMenu ? 'hover show' : ''}`}>
-                <span className="menu-link" onClick={() => setCountryMenu(!countryMenu)}>
-                    <span className="menu-bullet">
-                        <span className="bullet bullet-dot" />
-                    </span>
-                    <span className="menu-title">Country</span>
-                    <span className="menu-arrow" />
-                </span>
-                <div className={`menu-sub menu-sub-accordion menu-active-bg ${countryMenu && 'show'}`}>
+                
+                    <div className="menu-item">
+                        <Link href='/admin/countries'>
+                            <a className="menu-link">
+                                <span className="menu-bullet">
+                                    <span className="bullet bullet-dot" />
+                                </span>
+                                <span className="menu-title">Countries</span>
+                            </a>
+                        </Link>
+                    </div>
+
+               
+                {/* <div className={`menu-sub menu-sub-accordion menu-active-bg ${countryMenu && 'show'}`}>
                     <div className="menu-item">
                         <Link href='/admin/countries'>
                             <a className="menu-link">
@@ -50,7 +55,7 @@ const LcoationSubMenu = () => {
                             <span className="menu-title">Add Country</span>
                         </span>
 
-                    </div>
+                    </div> */}
                     {/* <div className="menu-item">
 
                         <span onClick={() => {
@@ -64,19 +69,22 @@ const LcoationSubMenu = () => {
                         </span>
 
                     </div> */}
-                </div>
+                {/* </div> */}
 
             </div>
 
             <div data-kt-menu-trigger="click" className={`menu-item menu-accordion ${stateMenu ? 'hover show' : ''}`}>
-                <span className="menu-link" onClick={() => setStateMenu(!stateMenu)}>
-                    <span className="menu-bullet">
-                        <span className="bullet bullet-dot" />
-                    </span>
-                    <span className="menu-title">State</span>
-                    <span className="menu-arrow" />
-                </span>
-                <div className={`menu-sub menu-sub-accordion menu-active-bg ${stateMenu && 'show'}`}>
+            <div className="menu-item">
+                        <Link href='/admin/states'>
+                            <a className="menu-link">
+                                <span className="menu-bullet">
+                                    <span className="bullet bullet-dot" />
+                                </span>
+                                <span className="menu-title">States</span>
+                            </a>
+                        </Link>
+                    </div>
+                {/* <div className={`menu-sub menu-sub-accordion menu-active-bg ${stateMenu && 'show'}`}>
 
                     <div className="menu-item">
                         <Link href='/admin/states'>
@@ -102,17 +110,20 @@ const LcoationSubMenu = () => {
 
                     </div>
 
-                </div>
+                </div> */}
             </div>
             <div data-kt-menu-trigger="click" className={`menu-item menu-accordion ${timezoneMenu ? 'hover show' : ''}`}>
-                <span className="menu-link" onClick={() => setTimezoneMenuMenu(!timezoneMenu)}>
-                    <span className="menu-bullet">
-                        <span className="bullet bullet-dot" />
-                    </span>
-                    <span className="menu-title">Time zone</span>
-                    <span className="menu-arrow" />
-                </span>
-                <div className={`menu-sub menu-sub-accordion menu-active-bg ${timezoneMenu && 'show'}`}>
+            <div className="menu-item">
+                        <Link href='/admin/timezones'>
+                            <a className="menu-link">
+                                <span className="menu-bullet">
+                                    <span className="bullet bullet-dot" />
+                                </span>
+                                <span className="menu-title">Time Zones</span>
+                            </a>
+                        </Link>
+                    </div>
+                {/* <div className={`menu-sub menu-sub-accordion menu-active-bg ${timezoneMenu && 'show'}`}>
 
                     <div className="menu-item">
                         <Link href='/admin/timezones'>
@@ -150,11 +161,11 @@ const LcoationSubMenu = () => {
                         </span>
 
                     </div>
-                </div>
+                </div> */}
             </div>
-            {trigger === 'addcountry' && <AddCountry />}
+            {/* {trigger === 'addcountry' && <AddCountry />}
             {trigger === 'addstate' && <AddState />}
-            {trigger === 'addtimezone' && <AddTimezone />}
+            {trigger === 'addtimezone' && <AddTimezone />} */}
         </>
     );
 };
