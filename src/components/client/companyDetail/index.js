@@ -1,10 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import ample from "../../../assets/ample1.png";
-import CardRow from '../cardrow/CardRow';
 import Layout from '../layout';
 import styles from './CompanyDetail.module.css';
-const CompanyDetail = () => {
+const CompanyDetail = ({ companyDetail }) => {
+    const { company_name, company_description, website_url, founded_date,
+         linkedin_url, facebook_url, twitter_url, instagram_url} = companyDetail[0]
+  
+
     return (
         <>
             <Layout>
@@ -17,14 +20,12 @@ const CompanyDetail = () => {
                                         <Image src={ample} alt="ample ink" />
                                         <Link href="/">
                                             <a>
-                                                <h2 className={styles.site__title}>Ample Ink</h2>
+                                                <h2 className={styles.site__title}>{company_name}</h2>
                                             </a>
                                         </Link>
                                     </div>
                                     <p className={styles.about__description}>
-                                        There are many variations of passages of Lorem Ipsum
-                                        available, but themajority have suffered alteration in some
-                                        form, by injected humour
+                                       {company_description}
                                     </p>
                                 </div>
                             </div>
@@ -34,32 +35,32 @@ const CompanyDetail = () => {
                                 <div className={styles.company__info}>
                                     <ul>
                                         <li className={styles.company__info_list}>
-                                            <span>Founded : 2021</span>
+                                            <span>Founded : {founded_date}</span>
                                         </li>
                                         <li className={styles.company__info_list}>
                                             <span>Size : 1-10</span>
                                         </li>
                                         <li className={styles.company__info_list}>
-                                            <span>Website : www.night.co/labs</span>
+                                            <span>Website : {website_url}</span>
                                         </li>
                                         <li className={styles.company__info_list}>
                                             <div className={styles.social__info}>
-                                                <Link href="www.facebook.com">
+                                                <Link href={facebook_url || '/'}>
                                                     <a>
                                                         <i className="fab fa-facebook-f"></i>
                                                     </a>
                                                 </Link>
-                                                <Link href="">
+                                                <Link href={twitter_url || '/'}>
                                                     <a>
                                                         <i className="fab fa-twitter"></i>
                                                     </a>
                                                 </Link>
-                                                <Link href="">
+                                                <Link href={instagram_url || '/'}>
                                                     <a>
                                                         <i className="fab fa-instagram"></i>
                                                     </a>
                                                 </Link>
-                                                <Link href="">
+                                                <Link href={linkedin_url || '/'}>
                                                     <a>
                                                         <i className="fab fa-linkedin-in"></i>
                                                     </a>
@@ -90,7 +91,7 @@ const CompanyDetail = () => {
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-10">
-                                <CardRow />
+                                {/* <CardRow /> */}
                             </div>
                         </div>
                     </div>

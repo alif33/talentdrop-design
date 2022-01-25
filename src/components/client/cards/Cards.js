@@ -1,42 +1,63 @@
-import CardGrid from '../card/CardGrid';
+import { useState } from 'react';
 import CardRow from '../cardrow/CardRow';
+import CardGrid from './../card/CardGrid';
 import styles from './Cards.module.css';
 
-export default function Cards({children}) {
+export default function Cards({ jobs }) {
+  const [toggle, setToggle] = useState({ isGrid: false, isRow: true })
+
   return (
     <section className={styles.cards__section}>
       <div className={`${styles.toggle__container} container`}>
         <div className="row justify-content-end">
           <div className="col-6 d-flex justify-content-end">
             <div className={styles.card__view_toggler}>
-              <input type="checkbox" name="card__toggler" id="card__toggler" />
+
 
               <label htmlFor={styles.toggler__switch}>
-                <span className={styles.toggler__list}>
-                  <i className="fas fa-list"></i>
+                <span onClick={() => setToggle({ isGrid: false, isRow: true })} className={`${toggle.isRow ? styles.active : styles.toggler__list}`}>
+                  <span>
+                    <i className="fas fa-list"></i>
+                  </span>
                 </span>
               </label>
+
+
               <label htmlFor={styles.toggler__switch}>
-                <span className={styles.toggler__grid}>
-                  <i className="fas fa-th"></i>
+                <span onClick={() => setToggle({ isGrid: true, isRow: false })} className={`${toggle.isGrid ? styles.active : styles.toggler__grid}`}>
+                  <span className={`${toggle.isGrid && styles.active}`}>
+                    <i className="fas fa-th">
+                    </i>
+                  </span>
                 </span>
               </label>
+
             </div>
           </div>
         </div>
         <div className="container">
-          {/* <div className={`${styles.card__row} row`}>
-            <div className="col-sm-12 col-md-6 col-lg-4 p-3 text-center">
-              <CardGrid />
+          {toggle.isGrid &&
+            <div className={`${styles.card__row} row`}>
+
+              {jobs.map((job, i) => (
+                <div className="col-sm-12 col-md-6 col-lg-4 p-3 text-center">
+                  <CardGrid job={job} key={i} />
+                </div>
+              ))}
             </div>
-          </div> */}
-          <div className="row">
-            <div className="col-12 ">
-             <div className={styles.card__row}>
-           {children}
-             </div>
-            </div>
-          </div>
+          }
+          {toggle.isRow &&
+            <div className="row">
+              <div className="col-12 ">
+                <div className={styles.card__row}>
+                  {/* {jobs.map((job, i) => { <CardRow key={i} job={job} /> })} */}
+                  {
+                    jobs.map((job, i) => <CardRow job={job} key={i} />)
+                  }
+
+                </div>
+              </div>
+            </div>}
         </div>
       </div>
     </section>
