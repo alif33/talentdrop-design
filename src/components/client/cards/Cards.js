@@ -2,7 +2,7 @@ import CardGrid from '../card/CardGrid';
 import CardRow from '../cardrow/CardRow';
 import styles from './Cards.module.css';
 
-export default function Cards() {
+export default function Cards({children}) {
   return (
     <section className={styles.cards__section}>
       <div className={`${styles.toggle__container} container`}>
@@ -25,14 +25,16 @@ export default function Cards() {
           </div>
         </div>
         <div className="container">
-          <div className={`${styles.card__row} row`}>
+          {/* <div className={`${styles.card__row} row`}>
             <div className="col-sm-12 col-md-6 col-lg-4 p-3 text-center">
               <CardGrid />
             </div>
-          </div>
+          </div> */}
           <div className="row">
-            <div className="col-12">
-              <CardRow />
+            <div className="col-12 ">
+             <div className={styles.card__row}>
+           {children}
+             </div>
             </div>
           </div>
         </div>
