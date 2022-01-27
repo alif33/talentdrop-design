@@ -1,9 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import avatar from '../../../assets/avatar.png';
 import styles from './Header.module.css';
 
 const Header = () => {
+  const router = useRouter()
+  const handleDashboard = () => {
+    router.push('/login')
+  }
   return (
     <header className={`${styles.header} navbar-expand-lg`}>
       <div className="container">
@@ -35,7 +40,7 @@ const Header = () => {
                 General Referral
               </button>
               <div className={styles.user__avatar}>
-                <div className={styles.user__avatar_img}>
+                <div onClick={handleDashboard} className={styles.user__avatar_img}>
                   <Image src={avatar} alt="img/png" />
                 </div>
               </div>
