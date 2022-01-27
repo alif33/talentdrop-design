@@ -17,6 +17,7 @@ const ContactUs = () => {
             <h3 className={styles.form__title}>Contact Us</h3>
             <form action="" onSubmit={handleSubmit(onSubmit)}>
                 <input
+                    className='form-control my-3'
                     type="text"
                     name="name"
                     id="name"
@@ -24,6 +25,7 @@ const ContactUs = () => {
                     {...register('name', { required: true, maxLength: 20 })}
                 />
                 <input
+                    className='form-control my-3'
                     type="email"
                     name="email"
                     id="email"
@@ -31,6 +33,7 @@ const ContactUs = () => {
                     {...register('email', { required: true, maxLength: 30 })}
                 />
                 <textarea
+                    className='form-control my-3'
                     placeholder="Your Message"
                     {...register('message', { required: true, maxLength: 300 })}
                 />

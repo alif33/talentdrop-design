@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { useRouter } from "next/router";
-import CardRow from '../cardrow/CardRow';
 import Layout from '../layout';
 import styles from './Tag.module.css';
 const Tag = () => {
@@ -20,7 +19,7 @@ const Tag = () => {
                     </div>
                     <div className="row pt-5">
                         <div className="col-12">
-                            <CardRow />
+                            {/* <CardRow /> */}
                         </div>
                     </div>
                 </div>

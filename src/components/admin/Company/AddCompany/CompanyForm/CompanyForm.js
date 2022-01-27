@@ -15,14 +15,14 @@ const CompanyForm = () => {
     const { admins } = useSelector(state => state)
     const { register, watch, handleSubmit, formState: { errors }, reset } = useForm()
 
-    
+
     useEffect(() => {
         allCountry()
-      if(watch('country_id')){
-        allState()
-        allTimezone()
-      }
-        
+        if (watch('country_id')) {
+            allState()
+            allTimezone()
+        }
+
 
     }, [watch('country_id')])
 
@@ -206,7 +206,7 @@ const CompanyForm = () => {
                             {errors.employee_number && <span className="text-danger">Employee number required</span>}
 
                         </div>
-                      
+
                         <div className="mb-3 col-12 col-sm-6">
                             <label>Founded Date</label>
 
@@ -268,7 +268,7 @@ const CompanyForm = () => {
                                     <i className="fas fa-map-marker"></i>
                                 </span>
                                 <select
-                                    disabled={ states.length > 0 ? false : true}
+                                    disabled={states.length > 0 ? false : true}
                                     required
                                     {...register("state_id",
                                         {
@@ -298,7 +298,7 @@ const CompanyForm = () => {
                                     <i className="fas fa-globe"></i>
                                 </span>
                                 <select
-                                disabled={ timezones.length > 0 ? false : true}
+                                    disabled={timezones.length > 0 ? false : true}
                                     required
                                     {...register("timezone_id",
                                         {
@@ -363,24 +363,24 @@ const CompanyForm = () => {
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">
-                            <label>Linkdin</label>
+                            <label>Linkedin</label>
                             <div>
                                 <span style={styles}>
                                     <i className="fab fa-linkedin"></i>
                                 </span>
                                 <input
-                                    {...register("linkdin_url",
+                                    {...register("linkedin_url",
                                         {
                                             required: true, pattern: /^(ftp|http|https):\/\/[^ "]+$/
                                         }
                                     )}
 
                                     className="form-control"
-                                    placeholder="Facebook link"
+                                    placeholder="Linkedin link"
                                     style={{ paddingLeft: '30px' }}
                                 />
                             </div>
-                            {errors.linkdin_url && <span className="text-danger">Linkdin required with https://</span>}
+                            {errors.linkedin_url && <span className="text-danger">Linkedin required with https://</span>}
 
                         </div>
                         <div className="mb-3 col-12 col-sm-6">

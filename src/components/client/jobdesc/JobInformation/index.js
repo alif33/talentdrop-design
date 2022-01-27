@@ -3,7 +3,9 @@ import Link from 'next/link';
 import ample from '../../../../assets/ample1.png';
 import styles from '../JobDesc.module.css';
 import ContactUs from './ContactUs';
-const JobInformation = () => {
+const JobInformation = ({ jobDetail }) => {
+    const { job_salary, company } = jobDetail
+    const { company_name, company_slug } = company
 
     return (
         <aside className="col-md-3 py-3 py-md-0">
@@ -57,7 +59,7 @@ const JobInformation = () => {
                     <i className="fas fa-dollar-sign"></i>
                     <div className={styles.box__info}>
                         <h4 className={styles.info__title}>Salary</h4>
-                        <p>$10000/month</p>
+                        <p>{`$${job_salary}`}/month</p>
                     </div>
                 </div>
             </div>
@@ -68,9 +70,9 @@ const JobInformation = () => {
                 <h4 className={styles.company__subtitle}>About Company</h4>
                 <div className={styles.company__title}>
                     <Image src={ample} alt="Ample" />
-                    <span>Ample Ink</span>
+                    <span>{company_name}</span>
                 </div>
-                <Link href="/companydetails">
+                <Link href={`/${company_slug}`}>
                     <a className={styles.company__link}>Full Company Profile</a>
                 </Link>
             </div>

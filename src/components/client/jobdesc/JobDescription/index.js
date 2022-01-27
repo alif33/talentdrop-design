@@ -1,16 +1,18 @@
 import React from 'react';
 import styles from '../JobDesc.module.css';
 import RelatedJob from './RelatedJob';
-const JobDescription = () => {
+const JobDescription = ({ jobDetail }) => {
+    const { job_title, job_bounty, job_description, } = jobDetail
+    console.log()
     return (
         <>
             <div className="job__info">
                 <div className={styles.job__title}>
-                    <h2 className={styles.title}>lead product designer</h2>
+                    <h2 className={styles.title}>{job_title}</h2>
                     <div className={styles.details}>
                         <p>
                             <span className={styles.schedule}>full time</span>
-                            <span className={styles.rate}>$10,000</span>
+                            <span className={styles.rate}>{`$${job_bounty}`}</span>
                             <span className={styles.location}>
                                 <i className="fas fa-map-marker-alt"></i>
                                 San Fransisco, CA,USA
@@ -21,12 +23,7 @@ const JobDescription = () => {
                 <div className={styles.job__descriptions}>
                     <h3 className={styles.description__title}>Job Description</h3>
                     <p>
-                        There are many variations of passages of Lorem Ipsum
-                        available, but the majority have suffered ltera tion in some
-                        form, by injected humour, or randomised words which don&apos;t
-                        look even slightly believable. If you are going to use a
-                        passage of Lorem Ipsum, you need to be sure there isn&apos;t
-                        anything
+                        {job_description}
                     </p>
                 </div>
                 <div className={styles.key__responsibilites}>

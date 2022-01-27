@@ -12,7 +12,7 @@ export default function CardGrid({ job }) {
     <div className={`${styles.card__wrapper}`}>
       <div className={`${styles.card__body} text-center`}>
         <div className={styles.card__img}>
-          <Image src={company_logo || defaultLogo} alt="card/img" />
+          <Image src={defaultLogo} alt="card/img" />
         </div>
         <h3 className={styles.card__title}>
           <Link href={`/${company_slug}`}>

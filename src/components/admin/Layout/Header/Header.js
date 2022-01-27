@@ -1,5 +1,4 @@
 
-import MenuItem from "./MenuItem/MenuItem";
 import User from './User/User';
 const Header = () => {
 
@@ -28,7 +27,7 @@ const Header = () => {
                     <div className="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
                         <div className="d-flex align-items-stretch" id="kt_header_nav">
                             <div className="header-menu align-items-stretch" data-kt-drawer="true" data-kt-drawer-name="header-menu" data-kt-drawer-activate="{default: , lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_header_menu_mobile_toggle" data-kt-place="true" data-kt-place-mode="prepend" data-kt-place-parent="{default: '#kt_body', lg: '#kt_header_nav'}">
-                                <MenuItem />
+                                {/* <MenuItem /> */}
                             </div>
                         </div>
                         <div className="d-flex align-items-stretch flex-shrink-0">
