@@ -12,11 +12,15 @@ export default function JobDesc({ jobDetail }) {
     <Layout>
       <section className={styles.job__description}>
         <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-md-6">
+          <div className="row justify-content-center px-3">
+            <div className="col-md-12 col-lg-6">
               <JobDescription jobDetail={jobDetail} />
             </div>
-            <JobInformation jobDetail={jobDetail} />
+
+            <div className='col-md-12 col-lg-6'>
+              <JobInformation jobDetail={jobDetail} />
+
+            </div>
           </div>
         </div>
       </section>

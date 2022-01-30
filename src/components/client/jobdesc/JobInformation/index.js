@@ -8,7 +8,7 @@ const JobInformation = ({ jobDetail }) => {
     const { company_name, company_slug } = company
 
     return (
-        <aside className="col-md-3 py-3 py-md-0">
+        <aside className=" py-3 py-md-0">
             <div className={styles.job__detail_information}>
                 <h3 className={styles.information__title}>
                     Job Details Information

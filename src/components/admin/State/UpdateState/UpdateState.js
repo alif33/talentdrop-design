@@ -73,7 +73,7 @@ const UpdateState = (props) => {
                                     className="form-control"
                                     placeholder="Country name"
                                 >
-                                    {countries.countryList?.map((item, i) => <option selected={item.id == country_id} value={item.id}>{item.country_name}</option>)}
+                                    {countries.countryList?.map((item, i) => <option key={i} selected={item.id == country_id} value={item.id}>{item.country_name}</option>)}
                                 </select>
                             </div>
                             {errors.country_name && <span className="text-danger">Country name required</span>}

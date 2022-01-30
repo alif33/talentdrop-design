@@ -43,25 +43,23 @@ const Header = () => {
               <li className={styles.header__menu_li}>
                 <Link href="#">
                   <a
-                    onClick={() => {
-                      setStart(!start)
-                      setStatus(false)
-                    }}
+
+                    id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"
                   >
                     Start Here
                     {start ?
                       <span>
-                        <svg style={{ width: '30px' }} viewBox="0 0 24 24" focusable="false" class="chakra-icon css-1wsjt4h" aria-label="sorted ascending"><path fill="currentColor" d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"></path>
+                        <svg style={{ width: '30px' }} viewBox="0 0 24 24" focusable="false" className="chakra-icon css-1wsjt4h" aria-label="sorted ascending"><path fill="currentColor" d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"></path>
                         </svg>
                       </span>
                       :
                       <span>
-                        <svg style={{ width: '30px' }} viewBox="0 0 24 24" focusable="false" class="chakra-icon css-1wsjt4h" aria-label="sorted descending"><path fill="currentColor" d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
+                        <svg style={{ width: '30px' }} viewBox="0 0 24 24" focusable="false" className="chakra-icon css-1wsjt4h" aria-label="sorted descending"><path fill="currentColor" d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
                       </span>
                     }
                   </a>
                 </Link>
-                <ul className={`${start ? 'show' : ''} dropdown-menu`}>
+                <ul className="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
                   <li className={styles.dropdown__title}>How it works</li>
                   <li><a className="dropdown-item" href="#">Action</a></li>
                   <li><a className="dropdown-item" href="#">Another action</a></li>
@@ -71,24 +69,21 @@ const Header = () => {
 
               <li className={`${styles.header__menu_li} ''`}>
                 <Link href="#">
-                  <a onClick={() => {
-                    setStatus(!status)
-                    setStart(false)
-                  }}>
+                  <a id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Status
                     {status ?
                       <span>
-                        <svg style={{ width: '30px' }} viewBox="0 0 24 24" focusable="false" class="chakra-icon css-1wsjt4h" aria-label="sorted ascending"><path fill="currentColor" d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"></path>
+                        <svg style={{ width: '30px' }} viewBox="0 0 24 24" focusable="false" className="chakra-icon css-1wsjt4h" aria-label="sorted ascending"><path fill="currentColor" d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"></path>
                         </svg>
                       </span>
                       :
                       <span>
-                        <svg style={{ width: '30px' }} viewBox="0 0 24 24" focusable="false" class="chakra-icon css-1wsjt4h" aria-label="sorted descending"><path fill="currentColor" d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
+                        <svg style={{ width: '30px' }} viewBox="0 0 24 24" focusable="false" className="chakra-icon css-1wsjt4h" aria-label="sorted descending"><path fill="currentColor" d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
                       </span>
                     }
                   </a>
                 </Link>
-                <ul className={`${status ? 'show' : ''} dropdown-menu`}>
+                <ul className="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
 
                   <li className={styles.dropdown__title}>Referrer</li>
                   <li><a className="dropdown-item" href="#">Dashboard</a></li>
@@ -100,7 +95,7 @@ const Header = () => {
           </nav>
           <div className="col-4">
             <div className={styles.user}>
-              <button className={`${styles.user__cta_button} primary__button`}>
+              <button onClick={() => router.push('/refer')} className={`${styles.user__cta_button} primary__button`}>
                 General Referral
               </button>
               <div className={styles.user__avatar}>

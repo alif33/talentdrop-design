@@ -1,10 +1,14 @@
 import Link from "next/link";
+import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import Layout from "../layout";
 import Styles from './Refer.module.css';
 const Refer = () => {
+    const [recommender, setRecommender] = useState(false)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => console.log(data);
+
+
     return (
         <>
             <Layout>
@@ -34,16 +38,18 @@ const Refer = () => {
                             </div>
 
                             <div className="mb-4">
-                                <label>Website or LinkedIn <span className="text-danger">*</span></label>
+                                <label>Website or Linkedin <span className="text-danger">*</span></label>
 
-                                <input className="form-control" {...register("website", { required: true })} />
-                                {errors.website && <span className="text-danger">Required</span>}
+                                <input className="form-control" {...register("url_link", { required: true })} />
+                                {errors.url_link && <span className="text-danger">Required</span>}
+
+
                             </div>
                             <div className="d-flex gap-2 align-items-center">
-                                <input className="" type="checkbox" name="" id="" />
+                                <input onChange={(e) => setRecommender(e.target.checked)} className="" type="checkbox" name="" id="" />
                                 <p>You're referring yourself as the candidate.</p>
                             </div>
-                            <div>
+                            <div className={`${recommender ? 'b-block' : 'd-none'}`}>
                                 <div className="mt-5">
                                     <h3 className={Styles.refer_form_title}>Recommender</h3>
 
@@ -98,7 +104,7 @@ const Refer = () => {
                                     <label className="mb-5">How familiar are you with this person's work?  <span className="text-danger">*</span></label>
 
                                     <select className="form-control" {...register("candidate_website", { required: true })} >
-                                        <option defaultValue >Select...</option>
+                                        <option value="" selected disabled hidden >Select...</option>
                                         <option value="1">Very - fast hand knowledge</option>
                                         <option value="2">Somewhat</option>
                                         <option value="3">Just by reputaion</option>
@@ -111,7 +117,7 @@ const Refer = () => {
                                     <label className="mb-5">How would you describe them?  <span className="text-danger">*</span></label>
 
                                     <select className="form-control" {...register("candidate_website", { required: true })} >
-                                        <option defaultValue >Select...</option>
+                                        <option value="" selected disabled hidden >Select...</option>
                                         <option value="1">Superstar. One of the best people I know.</option>
                                         <option value="2">Great. Great person to have on any team.</option>
                                         <option value="3">Not sure. Need expert to evaluate skill and lavel.</option>
@@ -122,7 +128,7 @@ const Refer = () => {
                                     <label className="mb-5">How open to new opportunities are they?    <span className="text-danger">*</span></label>
 
                                     <select className="form-control" {...register("candidate_website", { required: true })} >
-                                        <option defaultValue >Select...</option>
+                                        <option value="" selected disabled hidden >Select...</option>
                                         <option value="1">Not sure</option>
                                         <option value="2">Somewhat</option>
                                         <option value="3">Very</option>
@@ -134,7 +140,7 @@ const Refer = () => {
                                     <label className="mb-5">You attest to their knowledge of being referred to Talentdrop, or a Talentdrop partner company. We'll be checking in with them!     <span className="text-danger">*</span></label>
 
                                     <select className="form-control" {...register("candidate_website", { required: true })} >
-                                        <option defaultValue >Select...</option>
+                                        <option value="" selected disabled hidden >Select...</option>
                                         <option value="1">Yes</option>
                                     </select>
                                     {errors.candidate_website && <span className="text-danger">Required</span>}
@@ -143,7 +149,7 @@ const Refer = () => {
                                     <label className="mb-5">Would you split your bounty payment with the candidate? <span className="text-danger">*</span></label>
 
                                     <select className="form-control" {...register("candidate_website", { required: true })} >
-                                        <option defaultValue >Select...</option>
+                                        <option value="" selected disabled hidden >Select...</option>
                                         <option value="1">Yes - 50/50</option>
                                         <option value="2">Yes - some other split</option>
                                         <option value="3">No</option>
@@ -156,7 +162,7 @@ const Refer = () => {
                                     <label className="mb-5">How'd you hear about us? <span className="text-danger">*</span></label>
 
                                     <select className="form-control" {...register("candidate_website", { required: true })} >
-                                        <option defaultValue >Select...</option>
+                                        <option value="" selected disabled hidden >Select...</option>
                                         <option value="1">YC</option>
                                         <option value="2">Linkedin</option>
                                         <option value="3">Twitter</option>

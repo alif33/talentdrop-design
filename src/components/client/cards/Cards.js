@@ -40,8 +40,8 @@ export default function Cards({ jobs }) {
             <div className={`${styles.card__row} row`}>
 
               {jobs.map((job, i) => (
-                <div className="col-sm-12 col-md-6 col-lg-4 p-3 text-center">
-                  <CardGrid job={job} key={i} />
+                <div key={i} className="col-sm-12 col-md-6 col-lg-4 p-3 text-center">
+                  <CardGrid job={job} />
                 </div>
               ))}
             </div>
