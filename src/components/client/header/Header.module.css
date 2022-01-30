@@ -5,6 +5,7 @@
   position: relative;
   z-index: 999;
 }
+
 .header__logo_link {
   color: var(--font-color-1);
   font-weight: 700;
@@ -17,6 +18,18 @@
   font-size: 1.6rem;
   line-height: 2rem;
   text-transform: capitalize;
+}
+
+.header__menu_li ul {
+  min-width: 300px;
+  padding: 10px;
+}
+
+
+.dropdown__title {
+  padding-left: 14px;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .user__cta_button {
@@ -81,6 +94,12 @@
     line-height: 2.394rem;
   }
 
+  .header__menu_li ul li a {
+    color: var(--font-color-1);
+    font-size: 1.5rem;
+    line-height: 2.394rem;
+  }
+
   .user__cta_button {
     display: block;
   }
@@ -100,9 +119,11 @@
   .header {
     padding: 3.5rem 1rem;
   }
+
   .header__logo {
     padding-left: 1.7rem;
   }
+
   .user {
     gap: 5rem;
   }

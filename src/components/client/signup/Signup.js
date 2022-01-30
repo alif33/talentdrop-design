@@ -1,12 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from "react-hook-form";
-import * as Yup from 'yup';
-import styles from './Signup.module.css';
-import BeatLoader from "react-spinners/BeatLoader";
-import { useState } from 'react';
 import { useRouter } from 'next/router';
-import toast, { Toaster } from 'react-hot-toast';
+import { useState } from 'react';
+import { useForm } from "react-hook-form";
+import toast from 'react-hot-toast';
+import BeatLoader from "react-spinners/BeatLoader";
+import * as Yup from 'yup';
 import { postData } from './../../../../__lib__/helpers/HttpService';
+import styles from './Signup.module.css';
 export default function Signup() {
 
   // form validation rules 
@@ -16,7 +16,7 @@ export default function Signup() {
       .matches(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/, 'At least one uppercase letter, one lowercase letter and one number')
       .min(8, 'Password must be at least 8 characters'),
 
-      password_confirmation: Yup.string()
+    password_confirmation: Yup.string()
       .required('Confirm Password is required')
       .oneOf([Yup.ref('password')], 'Passwords must match')
 
@@ -38,10 +38,10 @@ export default function Signup() {
       .then(res => {
         console.log(res)
         if (res?.user) {
-          // cookies.set("user_token", res.token, { path: '/' })
+          cookies.set("user_token", res.token, { path: '/' })
           toast.success(res.message)
-          router.push("/user/login")
-        }else{
+          router.push("/login")
+        } else {
           toast.error('email already taken')
         }
       })
@@ -49,7 +49,7 @@ export default function Signup() {
 
   return (
     <div>
-   
+
       <section className={styles.signup__section}>
         <div className="container">
           <div className={styles.signup__form_wrapper}>
