@@ -7,7 +7,7 @@ import Layout from './../src/components/client/layout/index';
 import TrustedCompany from './../src/components/client/trustedCompanies/TrustedCompany';
 
 
-function index({ jobs }) {
+function index({ jobs, generalJob }) {
 
   return (
     <>
@@ -20,7 +20,7 @@ function index({ jobs }) {
       <Layout>
         <Banner />
         <TrustedCompany />
-        <Cards jobs={jobs}></Cards>
+        <Cards jobs={jobs} generalJob={generalJob} />
       </Layout>
     </>
   );
@@ -29,9 +29,11 @@ export default index
 
 export async function getServerSideProps() {
   const res = await getData('/jobs')
+  const general = await getData('/job/6')
   return {
     props: {
-      jobs: res
+      jobs: res,
+      generalJob: general
     }
   }
 }

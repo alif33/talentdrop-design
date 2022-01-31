@@ -14,7 +14,7 @@ const Tags = () => {
 
     useEffect(() => {
         dispatch(setTags())
-    }, [])
+    }, [setTags()])
 
     const { tagList } = tags;
 

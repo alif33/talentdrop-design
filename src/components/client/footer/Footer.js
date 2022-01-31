@@ -24,37 +24,37 @@ export default function Footer() {
               <nav className={styles.footer__menu}>
                 <ul>
                   <li>
-                    <Link href="">
+                    <Link href="/our_team">
                       <a>our team</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="">
+                    <Link href="/terms_of_use">
                       <a>terms of use</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="">
+                    <Link href="/privacy_policy">
                       <a>privacy policy</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="">
+                    <Link href="/for_referrers">
                       <a>for referrers</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="">
+                    <Link href="/employers">
                       <a>for employers</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="">
+                    <Link href="/pricing">
                       <a>pricing</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="">
+                    <Link href="/contact_us">
                       <a>contact us</a>
                     </Link>
                   </li>
@@ -62,35 +62,35 @@ export default function Footer() {
               </nav>
               <div className={styles.footer__social}>
                 <div className={styles.footer__social_item}>
-                  <Link href="">
+                  <Link href="/">
                     <a>
                       <i className="fab fa-facebook-f"></i>
                     </a>
                   </Link>
                 </div>
                 <div className={styles.footer__social_item}>
-                  <Link href="">
+                  <Link href="/">
                     <a>
                       <i className="fab fa-twitter"></i>
                     </a>
                   </Link>
                 </div>
                 <div className={styles.footer__social_item}>
-                  <Link href="">
+                  <Link href="/">
                     <a>
                       <i className="fab fa-instagram"></i>
                     </a>
                   </Link>
                 </div>
                 <div className={styles.footer__social_item}>
-                  <Link href="">
+                  <Link href="/">
                     <a>
                       <i className="fab fa-linkedin-in"></i>
                     </a>
                   </Link>
                 </div>
                 <div className={styles.footer__social_item}>
-                  <Link href="">
+                  <Link href="/">
                     <a>
                       <i className="fab fa-google-plus-g"></i>
                     </a>
@@ -98,7 +98,7 @@ export default function Footer() {
                 </div>
               </div>
               <p className={styles.footer__copyright}>
-                2022 &copy; Crypto Market Cap & Pricing Data Provided By Nomics
+                2022 &copy; Crypto Market Cap &#38; Pricing Data Provided By Nomics
               </p>
             </div>
           </div>

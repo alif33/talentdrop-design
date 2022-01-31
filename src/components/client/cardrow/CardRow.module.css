@@ -65,9 +65,27 @@
 
 .card__location {
   color: var(--ligh-blue);
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 600;
   margin: 0;
+  background: #edf2f7;
+  padding: 3px 5px;
+  border-radius: 6px;
+}
+
+.card__tag {
+  color: var(--ligh-blue);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  background: #edf2f7;
+  padding: 3px 5px;
+  border-radius: 6px;
+
+}
+
+.card__tag a:hover {
+  text-decoration: underline !important;
 }
 
 .card__condition {

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
@@ -19,7 +20,7 @@ export default function Login() {
   const router = useRouter()
   const dispatch = useDispatch()
   const onSubmit = data => {
-      
+
     setDisable(true)
 
     postData('/user/login', data, setDisable)
@@ -31,7 +32,7 @@ export default function Login() {
             token: res.token,
             admin: res.admin
           }))
-        router.push("/user/dashboard")
+          router.push("/user/dashboard")
         }
       })
   }
@@ -64,6 +65,11 @@ export default function Login() {
             </div>
 
             <button type="reset">Forgot Password?</button>
+            <p className="text-center">
+              <Link href="/signup">
+                <a>Create new account</a>
+              </Link>
+            </p>
           </form>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
@@ -78,7 +79,9 @@ export default function Signup() {
 
                 </span>
               </button>
+              <p className='text-center'>Already have account? <Link href="/login"><a>Login</a></Link></p>
             </form>
+
           </div>
         </div >
       </section >

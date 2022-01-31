@@ -8,10 +8,12 @@ import styles from './Header.module.css';
 const Header = () => {
   const [start, setStart] = useState(false)
   const [status, setStatus] = useState(false)
-  const router = useRouter()
+  const router = useRouter();
+
   const handleDashboard = () => {
     router.push('/login')
   }
+
 
   // useEffect(() => {
   //   const handleWindowClick = () => {
@@ -95,7 +97,7 @@ const Header = () => {
           </nav>
           <div className="col-4">
             <div className={styles.user}>
-              <button onClick={() => router.push('/refer')} className={`${styles.user__cta_button} primary__button`}>
+              <button onClick={() => router.push('/r/talentdrop/general-referral/refer')} className={`${styles.user__cta_button} primary__button`}>
                 General Referral
               </button>
               <div className={styles.user__avatar}>

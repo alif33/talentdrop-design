@@ -3,9 +3,10 @@ import CardRow from '../cardrow/CardRow';
 import CardGrid from './../card/CardGrid';
 import styles from './Cards.module.css';
 
-export default function Cards({ jobs }) {
+export default function Cards({ jobs, generalJob }) {
   const [toggle, setToggle] = useState({ isGrid: false, isRow: true })
-
+  const filterJob = jobs.filter(job => job.id !== generalJob.id)
+  // console.log(filterJob)
   return (
     <section className={styles.cards__section}>
       <div className={`${styles.toggle__container} container`}>
@@ -36,6 +37,7 @@ export default function Cards({ jobs }) {
           </div>
         </div>
         <div className="container">
+
           {toggle.isGrid &&
             <div className={`${styles.card__row} row`}>
 
@@ -50,9 +52,9 @@ export default function Cards({ jobs }) {
             <div className="row">
               <div className="col-12 ">
                 <div className={styles.card__row}>
-                  {/* {jobs.map((job, i) => { <CardRow key={i} job={job} /> })} */}
+                  <CardRow job={generalJob} />
                   {
-                    jobs.map((job, i) => <CardRow job={job} key={i} />)
+                    filterJob.map((job, i) => <CardRow job={job} key={i} />)
                   }
 
                 </div>

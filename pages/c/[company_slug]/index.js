@@ -1,5 +1,5 @@
-import CompanyDetail from "../../src/components/client/companyDetail";
-import { getData } from './../../__lib__/helpers/HttpService';
+import CompanyDetail from "../../../src/components/client/companyDetail";
+import { getData } from "../../../__lib__/helpers/HttpService";
 
 const index = ({ company, jobs }) => {
     return (

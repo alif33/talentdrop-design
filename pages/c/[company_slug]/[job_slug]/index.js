@@ -1,6 +1,6 @@
 
-import JobDesc from '../../../src/components/client/jobdesc/JobDesc';
-import { getData } from '../../../__lib__/helpers/HttpService';
+import { getData } from '../../../../__lib__/helpers/HttpService';
+import JobDesc from './../../../../src/components/client/jobdesc/JobDesc';
 
 const index = ({ job }) => {
     console.log(job)
