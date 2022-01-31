@@ -1,6 +1,6 @@
 
-import JobDesc from './../../../src/components/client/jobdesc/JobDesc';
-import { getData } from './../../../__lib__/helpers/HttpService';
+import JobDesc from '../../../src/components/client/jobdesc/JobDesc';
+import { getData } from '../../../__lib__/helpers/HttpService';
 
 const index = ({ job }) => {
     console.log(job)
@@ -21,9 +21,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-    const { companyName, jobTitle } = context.params
-    console.log(companyName, jobTitle);
-    const res = await getData(`/job/find/${companyName}/${jobTitle}`)
+    const { company_slug, job_slug } = context.params
+
+    const res = await getData(`/job/find/${company_slug}/${job_slug}`)
     console.log(res)
     return {
         props: {

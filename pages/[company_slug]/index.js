@@ -1,10 +1,10 @@
 import CompanyDetail from "../../src/components/client/companyDetail";
 import { getData } from './../../__lib__/helpers/HttpService';
 
-const index = ({ company }) => {
+const index = ({ company, jobs }) => {
     return (
         <>
-            <CompanyDetail companyDetail={company} />
+            <CompanyDetail companyDetail={company} jobs={jobs} />
         </>
     );
 };
@@ -20,13 +20,15 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-    const { companyName } = context.params
+    const { company_slug } = context.params
 
-    const res = await getData(`/company/slug/${companyName}`)
+    const res = await getData(`/company/slug/${company_slug}`)
+    const jobs = await getData(`/jobs/company/${company_slug}`)
 
     return {
         props: {
-            company: res
+            company: res,
+            jobs: jobs
         }
     }
 }

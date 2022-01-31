@@ -50,7 +50,7 @@ const States = () => {
                 <div className="d-flex justify-content-between align-items-center py-5 ">
                     <h1 className="mt-3">All States</h1>
                     <div>
-                        <select onChange={handleOnChange} class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <select onChange={handleOnChange} className="form-select form-select-sm" aria-label=".form-select-sm example">
                             <option defaultValue >Select country</option>
                             {countryList?.map((item, i) => <option key={i} value={item.id}>{item.country_name}</option>)}
                         </select>
